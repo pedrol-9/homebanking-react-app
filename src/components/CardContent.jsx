@@ -1,17 +1,18 @@
-import React from 'react';
+import React from 'react'
 
-const CreditCard = ({ clientName, cardNumber, ccv, thruDate, cardType }) => {
+const CardContent = ({clientName, cardNumber, ccv, thruDate, cardType}) => {
   return (
-    <div className="bg-yellow-400 w-80 h-48 rounded-xl p-4 shadow-lg text-white relative">
+    <>
       <div className="absolute top-2 right-4">
-        {cardType === 'Credit' ? (
+        {cardType === 'CREDIT' ? (
           <span className="bg-gray-800 px-2 py-1 rounded">Credit</span>
         ) : (
           <span className="bg-gray-800 px-2 py-1 rounded">Debit</span>
         )}
       </div>
       <div className="mt-4">
-        {/* Espacio para el chip*/}
+
+        
         <p className="text-2xl mt-2 tracking-widest">{cardNumber}</p>
         <div className="flex justify-between mt-4">
           <div>
@@ -22,12 +23,20 @@ const CreditCard = ({ clientName, cardNumber, ccv, thruDate, cardType }) => {
             <p className="text-sm">CCV</p>
             <p>{ccv}</p>
           </div>
-          
-        </div>
-        <p className="text-lg">{clientName}</p>
-      </div>
-    </div>
-  );
-};
 
-export default CreditCard;
+        </div>
+        <div className='flex justify-between'>
+          <p className="text-lg font-bold">{clientName}</p>
+          <figure className='w-[55px] mb-3' >
+            <img className='mt-2' src="\assets\imgs\chip.png" alt="card chip" />
+          </figure>
+
+        </div>
+        
+      </div>
+
+    </>
+  )
+}
+
+export default CardContent

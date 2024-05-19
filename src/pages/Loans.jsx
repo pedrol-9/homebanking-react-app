@@ -10,11 +10,14 @@ import Banner from '../components/Banner'
 
 const Loans = () => {
   const [loans, setLoans] = useState([]);
-  const [client, setClient ] = useState([]);
+  const [client, setClient] = useState([]);
+  const [loading, setLoading] = useState(false);
+  
 
   useEffect(() => {
     const fetchAccounts = async () => {
       try {
+        setLoading(true)
         const response = await axios.get('http://localhost:8080/api/clients/1');
         console.log(response.data);
         console.log(response.data.loans);
@@ -22,11 +25,21 @@ const Loans = () => {
         setLoans(response.data.loans);
       } catch (err) {
         console.error('Error fetching data: ', err); // Capturar y mostrar el error en la consola
+      } finally {
+        setLoading(false)
       }
     };
 
     fetchAccounts(); // Llamar a la función fetchAccounts cuando el componente se monte
   }, []);
+
+  if (loading) {
+    return (
+    <div className='w-full text-center'>
+      <h1>Loading</h1>
+    </div>
+    )
+  }
 
   return (
     <>

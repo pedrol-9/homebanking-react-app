@@ -11,13 +11,15 @@ import Carrusel from '../components/Carrusel'
 const Accounts = () => {
 
   const [accounts, setAccounts] = useState([]);
-  const [client, setClient ] = useState([]);
+  const [client, setClient] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null); // Variable de estado para almacenar los errores
-  const [  ] = useState();
+  // const [] = useState();
 
   useEffect(() => {
     const fetchAccounts = async () => {
       try {
+        setLoading(true)
         const response = await axios.get('http://localhost:8080/api/clients/1');
         console.log(response.data);
         console.log(response.data.accounts);
@@ -26,11 +28,21 @@ const Accounts = () => {
       } catch (err) {
         console.error('Error fetching data: ', err); // Capturar y mostrar el error en la consola
         setError(err.message);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchAccounts(); // Llamar a la función fetchAccounts cuando el componente se monte
   }, []);
+
+  if (loading) {
+    return (
+    <div className='w-full text-center'>
+      <h1>Loading</h1>
+    </div>
+    )
+  }
 
   return (
     <>

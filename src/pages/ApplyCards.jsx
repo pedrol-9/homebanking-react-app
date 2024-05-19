@@ -10,7 +10,7 @@ const ApplyCards = () => {
   return (
     <>
       <MainLayout>
-        <Banner img='\assets\imgs\cheerfulWomanBlue.jpg' />
+        {/* <Banner img='\assets\imgs\cheerfulWomanBlue.jpg' /> */}
         <MainTitle text="Apply for a Card" />
         <div className='flex justify-center w-full items-center mt-4 mb-10'>
           <form className="w-1/2 flex flex-col m-4 bg-[#4F6F52] rounded-md p-4 border border-[3px] border-[#000000]">
