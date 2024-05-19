@@ -7,7 +7,7 @@ const AccCards = (props) => {
       <h4 className="text-[#E8DFCA]">Account Number: <span className='font-bold text-[#ffffff]'>{props.accNumber}</span></h4>
       <div>
         <h4 className="text-[#E8DFCA]">Amount:</h4>
-        <h1 className='font-bold text-2xl text-right w-full text-[#ffffff] my-2'>$2500.00 <span className='text-[#ffffff]'>usd</span>{props.amount}</h1>     
+        <h1 className='font-bold text-2xl text-right w-full text-[#ffffff] my-2'>{props.amount} <span className='text-[#ffffff]'>usd</span></h1>     
       </div>        
       <h4 className="text-[#E8DFCA]">Creation Date: <span className='font-bold text-[#ffffff]'>{props.creationDate}</span></h4>
     </div>

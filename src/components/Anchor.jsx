@@ -1,11 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Anchor = (props) => {
   return (
-    <a href={props.href} className={"text-lg no-underline font-light italic px-3 py-1 text-white rounded-md " + props.className || ''}>
-      <p>{props.text || ''}</p>
+    <Link to={props.to} className={"w-[8rem] text-lg no-underline font-bold italic px-3 py-1 rounded-md " + props.className || ''}>
+      <p className="text-[#1A4D2E]">{props.text || ''}</p>      
       {props.children}
-    </a>
+    </Link>
   )
 }
 

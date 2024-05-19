@@ -1,20 +1,56 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState, useEffect } from 'react'
 import AccCards from '../components/AccCards'
 import Banner from '../components/Banner'
-import NewAccBtn from '../components/NewAccBtn'
+import Button from '../components/Button'
+import MainTitle from '../components/MainTitle'
+import MainLayout from '../layouts/MainLayout'
+import Carrusel from '../components/Carrusel'
+
 
 const Accounts = () => {
+
+  const [accounts, setAccounts] = useState([]);
+  const [client, setClient ] = useState([]);
+  const [error, setError] = useState(null); // Variable de estado para almacenar los errores
+  const [  ] = useState();
+
+  useEffect(() => {
+    const fetchAccounts = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/clients/1');
+        console.log(response.data);
+        console.log(response.data.accounts);
+        setClient(response.data);
+        setAccounts(response.data.accounts);
+      } catch (err) {
+        console.error('Error fetching data: ', err); // Capturar y mostrar el error en la consola
+        setError(err.message);
+      }
+    };
+
+    fetchAccounts(); // Llamar a la función fetchAccounts cuando el componente se monte
+  }, []);
+
   return (
-    <div className='flex flex-col'>
-      <h1 className='w-full text-center text-2xl font-extrabold my-4'>Welcome, Melba!</h1>
-      <Banner/>         
-      <div className='flex flex-wrap'> 
-        <AccCards/>
-      </div>
-      <div className='flex justify-center my-4'>
-        <NewAccBtn/>
-      </div>
-    </div> 
+    <>
+      <MainLayout>
+        <div className='flex flex-col'>
+          <MainTitle text={"Welcome, " + client.firstName} />
+          {/* <Banner img='\assets\imgs\banner_homebanking.png'/> */}
+          <Carrusel />
+          <div className='flex flex-wrap'>
+            {
+              accounts.map((acc, id) => {
+                return <AccCards key={id} accNumber={acc.number} amount={acc.balance} creationDate={acc.creationDate} />
+              })
+            }
+          </div>
+          <Button text="New Account" to='' />
+        </div>
+      </MainLayout>
+    </>
+
   )
 }
 
