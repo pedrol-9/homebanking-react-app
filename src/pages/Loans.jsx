@@ -6,16 +6,17 @@ import MainTitle from '../components/MainTitle'
 import LoansInfo from '../components/LoansInfo'
 import MainLayout from '../layouts/MainLayout'
 import Button from '../components/Button'
-import Banner from '../components/Banner'
+import Spin from '../components/Spin'
 
 const Loans = () => {
   const [loans, setLoans] = useState([]);
   const [client, setClient] = useState([]);
   const [loading, setLoading] = useState(false);
-  
 
   useEffect(() => {
-    const fetchAccounts = async () => {
+    console.log("Loans Component Mounted")
+
+    const fetchLoans = async () => {
       try {
         setLoading(true)
         const response = await axios.get('http://localhost:8080/api/clients/1');
@@ -27,33 +28,36 @@ const Loans = () => {
         console.error('Error fetching data: ', err); // Capturar y mostrar el error en la consola
       } finally {
         setLoading(false)
+        console.log(loans)
       }
     };
 
-    fetchAccounts(); // Llamar a la función fetchAccounts cuando el componente se monte
+    fetchLoans(); // Llamar a la función fetchAccounts cuando el componente se monte
+
+    return () => {
+      console.log("Loans unmounted")
+    }
+
   }, []);
 
   if (loading) {
     return (
-    <div className='w-full text-center'>
-      <h1>Loading</h1>
-    </div>
-    )
+      <Spin />
+    );
   }
 
   return (
     <>
       <MainLayout>
         <div>
-          {/* <div className='w-full'>
-            <Banner img="\assets\imgs\cheerfulWomanOrange.jpg" />
-          </div> */}
+          
           <MainTitle text='Your Loans' />
-          <div className='flex flex-wrap'>
-            { 
-              loans.map((loan, id) => {
-                return <LoansInfo key={id} loanType={loan.name} amount={loan.amount} creationDate={loan.creationDate} />
-              })              
+
+          <div className='flex flex-wrap justify-center my-28'>
+            {
+              loans.map((loan, id) => (
+                <LoansInfo key={id} loanType={loan.name} amount={loan.amount} payments={loan.payments} />
+              ))
             }
           </div>
           <Button text='Request new Loan' to='/ApplyLoans' />

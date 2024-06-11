@@ -1,6 +1,5 @@
 import React from 'react'
 import MainTitle from '../components/MainTitle'
-import Banner from '../components/Banner'
 import TableTransactions from '../components/TableTransations'
 
 import AccCards from '../components/AccCards'
@@ -18,12 +17,8 @@ const SelectedAccount = () => {
           <div className="w-4/5">
             <TableTransactions />
           </div>
-
-
         </div>
-
-
-        <Banner />
+        
       </MainLayout>
     </>
 

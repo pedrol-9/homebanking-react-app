@@ -11,11 +11,12 @@ const CardsContainer = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    console.log("CardsContainer Mounted")
+
     const fetchCardData = async () => {
       try {
         setLoading(true)
-        const response = await axios.get('http://localhost:8080/api/clients/1');
-        // console.log(loading) // Por qué aquí loading = false?
+        const response = await axios.get('http://localhost:8080/api/clients/2');
         console.log(response.data)
         console.log(response.data.cards)
         setClient(response.data)
@@ -37,20 +38,18 @@ const CardsContainer = () => {
         <h1>Loading</h1>
       </div>
     )
-  } else {
-     // console.log(cardData) // Por qué aquí el array sale vacío? y por qué se muestra dos veces en la consola?
   }
 
   return (
     <>
       <MainTitle text={'Hi, ' + client.firstName + '. Here your cards!'} css='' />
-      <div className='flex flex-wrap gap-8 justify-center my-14'>
+      <div className='flex flex-wrap gap-8 justify-center my-28'>
         {
           cardData.map((card, id) => {
 
             if (card.cardColor === "GOLD") {
 
-              return <div key={id} className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 w-80 h-48 rounded-xl p-4 shadow-lg text-white relative">
+              return <div key={id} className="bg-gradient-to-r from-yellow-400 via-yellow-50s0 to-yellow-600 w-80 h-48 rounded-xl p-4 shadow-lg text-white relative">
                 <CardContent clientName={card.cardHolder} cardNumber={card.number} ccv={card.ccv} thruDate={card.thruDate} cardType={card.cardType} />
               </div>
 

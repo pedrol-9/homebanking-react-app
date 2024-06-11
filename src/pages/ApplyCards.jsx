@@ -4,13 +4,19 @@ import MainTitle from '../components/MainTitle'
 import SelectCardType from '../components/SelectCardType'
 import SelectCardMembership from '../components/SelectCardMembership'
 import MainLayout from '../layouts/MainLayout'
-import Banner from '../components/Banner'
 
 const ApplyCards = () => {
+  /* const [loading, setLoading] = useState(false);
+
+  if (loading) {
+    return (
+      <Spin />
+    );
+  } */
+
   return (
     <>
       <MainLayout>
-        {/* <Banner img='\assets\imgs\cheerfulWomanBlue.jpg' /> */}
         <MainTitle text="Apply for a Card" />
         <div className='flex justify-center w-full items-center mt-4 mb-10'>
           <form className="w-1/2 flex flex-col m-4 bg-[#4F6F52] rounded-md p-4 border border-[3px] border-[#000000]">
