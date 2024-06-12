@@ -6,31 +6,54 @@ import MainTitle from '../components/MainTitle';
 import Button from '../components/Button';
 import Spin from '../components/Spin';
 import { TECollapse, TERipple, TEInput } from "tw-elements-react";
+import { useDispatch } from 'react-redux';
+import { login } from '../redux/actions/authActions';
 
-const Login = () => {
+
+const Home = () => {
+
+  const dispatch = useDispatch();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+  
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+  
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate(); // Hook para redireccionar
 
-  /* const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleLogin = async () => {
+    // e.preventDefault();
+
+    setLoading(true);
+
+    const user = {
+      email: username,
+      password: password
+    }
 
     try {
-      setLoading(true);
-      const response = await axios.post('http://localhost:8080/api/auth/login',
-        {
-          "email": username,
-          "password": password
-        });
+      const response = await axios.post('http://localhost:8080/api/auth/login', user);
+      let token = response.data;
 
-      const { token } = response.data;
-      localStorage.setItem('token', token);
-      console.log('Token stored:', token);
+      const responseCurrentClient = await axios.get("http://localhost:8080/api/auth/current", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
 
-      // Redireccionar al usuario a la página de cuentas u otra página de tu aplicación
-      navigate('/accounts');
+      let client = responseCurrentClient.data;
+      client.token = token
+
+      console.log(client);
+      dispatch(login(client))
 
     } catch (error) {
       console.error('Error:', error);
@@ -38,7 +61,9 @@ const Login = () => {
     } finally {
       setLoading(false);
     }
-  }; */
+  };
+
+  // dispatch(login(user));
 
   if (loading) {
     return (
@@ -74,6 +99,7 @@ const Login = () => {
                       label="Email address"
                       size="lg"
                       className=""
+                      onChange={handleUsernameChange}
                     />
                   </div>
 
@@ -84,6 +110,7 @@ const Login = () => {
                       label="Password"
                       className=""
                       size="lg"
+                      onChange={handlePasswordChange}
                     />
                   </div>
 
@@ -111,16 +138,16 @@ const Login = () => {
                   {/* <!-- Login button --> */}
                   <div className="text-center lg:text-left">
                     <TERipple rippleColor="light">
-                      <Button to="/Register" text="Login" css='text-sm' />
+                      <Button to="#" text="Login" css='text-sm' onClick={handleLogin} />
                     </TERipple>
 
                     <hr className="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem] border-dotted" />
 
                     {/* <!-- Register link --> */}
-                    <p className="mb-0 mt-2 pt-1 text-[#1A4D2E] font-bold">
+                    <div className="mb-0 mt-2 pt-1 text-[#1A4D2E] font-bold">
                       Don't have an account?{" "}
                       <Button to="/Register" text="Register" css='text-sm' />
-                    </p>
+                    </div>
                   </div>
                 </form>
               </div>
@@ -132,7 +159,7 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Home;
 
 {
   /* BASIC LOGING FORM
@@ -156,6 +183,26 @@ export default Login;
 */
 }
 
+
+/* const response = await axios.post('http://localhost:8080/api/auth/login',
+  {
+    "email": username,
+    "password": password
+  });
+
+const { token } = response.data;
+localStorage.setItem('token', token);
+console.log('Token stored:', token);
+
+// Redireccionar al usuario a la página de cuentas u otra página de tu aplicación
+navigate('/accounts');
+
+} catch (error) {
+console.error('Error:', error);
+setError('Authentication failed');
+} finally {
+setLoading(false);
+} */
 
 
 

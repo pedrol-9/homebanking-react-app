@@ -1,89 +1,68 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import MainLayout from '../layouts/MainLayout';
+import Button from '../components/Button';
+import Spin from '../components/Spin';
+import { TEInput } from "tw-elements-react";
 
 const RegisterForm = () => {
-    const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''
-    });
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-    const [message, setMessage] = useState('');
+  const handleRegister = async () => {
+    setLoading(true);
+    // Lógica de registro aquí
+    setLoading(false);
+  };
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
-    };
+  if (loading) {
+    return <Spin />;
+  }
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:8080/api/auth/register', formData);
-            setMessage('Client created with account number: ' + response.data);
-        } catch (error) {
-            if (error) {
-                setMessage('Error: ' + error);
-                console.log(error)
-            } else {
-                setMessage('An error occurred while registering the client.');
-                console.log(error)
-            }
-        }
-    };
-
-    return (
-        <div>
-            <h1>Register Client</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="firstName">First Name:</label>
-                <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    required
-                /><br /><br />
-
-                <label htmlFor="lastName">Last Name:</label>
-                <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    required
-                /><br /><br />
-
-                <label htmlFor="email">Email:</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                /><br /><br />
-
-                <label htmlFor="password">Password:</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                /><br /><br />
-
-                <button type="submit">Register</button>
-            </form>
-            {message && <p>{message}</p>}
+  return (
+    <div className='flex justify-center items-center min-h-screen'>
+      {/* Ajusta el ancho del contenedor aquí */}
+      <div className="bg-white p-8 rounded-lg shadow-lg w-2/5">
+        <h2 className="text-2xl font-bold mb-4">Register</h2>
+        <div className=' mb-4'>
+          <TEInput
+            type="text"
+            label="Full Name"
+            size="lg"
+            className=""
+          />
         </div>
-    );
+        <div className=' mb-4'>
+          <TEInput
+            type="email"
+            label="Email address"
+            size="lg"
+            className=""
+          />
+        </div>
+        <div className=' mb-4'>
+          <TEInput
+            type="password"
+            label="Password"
+            className=""
+            size="lg"
+          />
+        </div>
+        <div className=' mb-4'>
+          <TEInput
+            type="password"
+            label="Confirm Password"
+            className=""
+            size="lg"
+          />
+        </div>
+        <Button onClick={handleRegister} text="Register" />
+        {/* <p className="mt-2 text-center text-gray-500">
+          Already have an account? <a href="#!" className="text-blue-500">Login</a>
+        </p> */}
+      </div>
+    </div>
+  );
 };
 
-export default RegisterForm
+export default RegisterForm;

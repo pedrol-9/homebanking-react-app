@@ -4,7 +4,7 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="flex flex-wrap min-h-[10vh] justify-between items-center w-full text-center text-bold text-[#ffffff] italic py-3 px-8  bg-gradient-to-r from-[#1A4D2E] via-[#4F6F52] from-sky-500">
+      <footer className="flex flex-wrap min-h-[10vh] justify-between items-center w-full text-center text-bold text-[#ffffff] italic py-3 px-8  bg-gradient-to-r from-[#1A4D2E] via-[#4F6F52] to-[#1A4D2E]">
         <div className=''>
           <p className='ml-3'>Copyright &#169; 2024</p>
           <h5>Homebanking App - MindHub Cohort N°54</h5>
