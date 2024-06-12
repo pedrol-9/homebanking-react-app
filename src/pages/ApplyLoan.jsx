@@ -3,47 +3,99 @@ import axios from 'axios';
 import MainTitle from '../components/MainTitle'
 import MainLayout from '../layouts/MainLayout'
 import Spin from '../components/Spin'
+import { useSelector } from 'react-redux';
 
 const ApplyLoan = ({ }) => {
+
   const [loans, setLoans] = useState([]);
-  const [loanInfo, setLoanInfo] = useState([]);
+  const [accounts, setAccounts] = useState([]);
+  const [payments, setPayments] = useState([]);
+  const [selectedLoanName, setSelectedLoanName] = useState('');
+
+  // const [loanInfo, setLoanInfo] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [payments, setPayments] = useState([]);
 
-  /* useEffect(() => {
+  const user = useSelector((state) => state.authReducer.user);
+  const token = useSelector((state) => state.authReducer.token);
+
+  const handleLoanChange = (e) => {
+    setSelectedLoanName(e.target.value);
+  };
+
+  useEffect(() => {
+
     console.log("ApplyLoan component mounted")
+
     const fetchLoanInfo = async () => {
+
       try {
+
         setLoading(true);
-        const response = await axios.get('http://localhost:8080/api/loans/');
+
+        const response = await axios.get('http://localhost:8080/api/loans/', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
         console.log(response.data); // loans
         setLoans(response.data);
-        console.log(response.data[0]); // loanInfo
-        setLoanInfo(response.data[0]);
-        console.log(response.data[0].payments) // payments
-        setPayments(response.data[0].payments)
+
+        const responseCurrentAccounts = await axios.get('http://localhost:8080/api/clients/current/accounts', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        console.log(responseCurrentAccounts.data); // accounts
+        setAccounts(responseCurrentAccounts.data);
+
       } catch (error) {
+
         setError(error);
         console.error('Error parsing loan info:', error);
         return null;
-      } finally {
-        setLoading(false);
-        console.log(loans)
-        console.log(loanInfo)
-        console.log(payments)
-      }
-    };    
 
-    fetchLoanInfo();
+      } finally {
+
+        setLoading(false);
+
+      }
+    };
+
+    if (loans) {
+
+      fetchLoanInfo();
+
+    }
 
     return (() => {
       console.log("ApplyLoan component unmounted")
     })
+  }, [token]);
 
-  }, []); */
+  useEffect(() => {
 
-  
+    if (selectedLoanName) {
+
+      const selectedLoan = loans.find((loan) => loan.loanName === selectedLoanName);
+
+      if (selectedLoan) {
+        setPayments(selectedLoan.payments);
+      }
+    }
+
+  }, [selectedLoanName, loans]);
+
+  const renderPaymentOptions = () => {
+    return payments.map((payment) => (
+      <option key={payment} value={payment} className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-bold text-lg">
+        {payment}
+      </option>
+    ));
+  };
+
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -51,7 +103,7 @@ const ApplyLoan = ({ }) => {
 
   if (loading) {
     return (
-      <Spin/>
+      <Spin />
     );
   }
 
@@ -63,25 +115,25 @@ const ApplyLoan = ({ }) => {
           <form action="" className='flex flex-wrap items-center justify-around w-4/5 items-center mt-4 mb-10 p-4 mt-10'>
             <div className='w-[48%] flex flex-col'>
               <label className=''> Select Loan Type
-                <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option disabled >e.g.: Mortgage</option>
-                  {/* {
-                    loanInfo.map((loan) => (
-                      <option className='tex-black' key={loan.id} value={loan.loanType}>{loan.loanType}</option>
+                <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleLoanChange}>
+                  <option disabled className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-thin text-lg">e.g.: Mortgage</option>
+                  {
+                    loans.map((loan) => (
+                      <option key={loan.id} value={loan.loanName} className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-bold text-lg">{loan.loanName}</option>
                     ))
-                    
-                  } */}
+
+                  }
                 </select>
               </label>
 
-              <label className='mt-8'> Select Account
+              <label className='mt-8'> Select Destination Account
                 <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option disabled >e.g.: VIN-00001201</option>
-                  {/* {
-                    loanInfo.map( (loan) => (
-                      <option key={loan.id} value={loan.accountNumber}>{loan.accountNumber}</option>
+                  <option disabled className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-thin text-lg" >e.g.: VIN-00000001</option>
+                  {
+                    accounts.map((acc) => (
+                      <option key={acc.id} value={acc.number} className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-bold text-lg">{acc.number}</option>
                     ))
-                  } */}
+                  }
                 </select>
               </label>
 
@@ -91,12 +143,8 @@ const ApplyLoan = ({ }) => {
 
               <label className='mt-8'> Installments
                 <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option disabled >e.g.: 60</option>
-                  {/* {
-                    payments.map((payment) => (
-                      <option key={payment} value={payment}>{payment}</option>
-                    ))
-                  } */}
+                  <option disabled className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-thin text-lg">e.g.: 60</option>
+                  {renderPaymentOptions()}
                 </select>
               </label>
             </div>

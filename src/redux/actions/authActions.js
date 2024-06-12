@@ -6,14 +6,14 @@ export const login = createAction('LOGIN', (user) => {
 
     const clearInfo = {
         token: user.token,
-        // loggedIn: user.loggedIn,
-        // expiresIn: user.expiresIn,
+        // loggedIn: true,
+        // expiresIn: new Date(Date.now() + 1000 * 60 * 60).toISOString(),
         id: user.id,
         name: user.firstName + " " + user.lastName,
         email: user.email,
-        accounts: user.accounts,
-        cards: user.cards,
-        loans: user.loans
+        // accounts: user.accounts,
+        // cards: user.cards,
+        // loans: user.loans
         // password: user.password,
     }
 

@@ -21,18 +21,18 @@ const authReducer = createReducer(initialState, (builder) => {
 		.addCase(login, (state, action) => {
 			
 			return {
-				...state,
-				loggedIn: action.payload.loggedIn,
-				token: action.payload.token,
-				expiresIn: action.payload.expiresIn,
+				...state,				
 				user: {
 					id: action.payload.id,
 					name: action.payload.name,
 					email: action.payload.email,
-					accounts: action.payload.accounts,
-					cards: action.payload.cards,
-					loans: action.payload.loans
-				}				
+					// accounts: action.payload.accounts,
+					// cards: action.payload.cards,
+					// loans: action.payload.loans
+				},
+				loggedIn: action.payload.loggedIn,
+				token: action.payload.token,
+				expiresIn: action.payload.expiresIn,				
 			}
 		})
 		

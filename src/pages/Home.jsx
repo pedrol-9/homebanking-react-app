@@ -20,11 +20,11 @@ const Home = () => {
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
-  
+
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
-  
+
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate(); // Hook para redireccionar
@@ -39,8 +39,15 @@ const Home = () => {
     }
 
     try {
+
       const response = await axios.post('http://localhost:8080/api/auth/login', user);
       let token = response.data;
+
+      if (response.status !== 200) {
+        return null;
+      }
+
+      console.log(response) // sí responde con el token
 
       const responseCurrentClient = await axios.get("http://localhost:8080/api/auth/current", {
         headers: {
@@ -51,18 +58,23 @@ const Home = () => {
       let client = responseCurrentClient.data;
       client.token = token
 
-      console.log(client);
-      dispatch(login(client))
+      console.log(client); // El cliente con el token
+
+      dispatch(login(client)) 
 
     } catch (error) {
+
+
       console.error('Error:', error);
       setError('Authentication failed');
+      alert('Status: ' + error.response.status + ' authentication failed') // mejorar el alert con tostify o sweetalert
+
     } finally {
+
       setLoading(false);
+
     }
   };
-
-  // dispatch(login(user));
 
   if (loading) {
     return (

@@ -3,36 +3,58 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import CardContent from './CardContent'
 import MainTitle from './MainTitle';
+import { useSelector  } from 'react-redux';
 
 const CardsContainer = () => {
 
-  const [cardData, setCardData] = useState([]);
-  const [client, setClient] = useState([]);
+  const [cards, setCards] = useState([]);
+  // const [client, setClient] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const user = useSelector((state) => state.authReducer.user);
+  const token = useSelector((state) => state.authReducer.token);
+
   useEffect(() => {
+    
     console.log("CardsContainer Mounted")
 
-    const fetchCardData = async () => {
+    const fetchCards = async () => {
+
       try {
+
         setLoading(true)
-        const response = await axios.get('http://localhost:8080/api/clients/2');
+        const response = await axios.get('http://localhost:8080/api/clients/current/cards', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
         console.log(response.data)
-        console.log(response.data.cards)
-        setClient(response.data)
-        setCardData(response.data.cards);
+        
+        setCards(response.data);
+
       } catch (err) {
+
         console.error('Error fetching data: ', err);
+
       } finally {
+
         setLoading(false)
-        console.log(loading)
+        
       }
     }
 
-    fetchCardData();
-  }, []);
+    if (cards) {
+      fetchCards();
+    }
 
-  if (!cardData) {
+    return () => {
+      console.log("CardsContainer Unmounted")
+    }
+  }, [token]);
+
+  if (!cards) {
+
     return (
       <div className='w-full text-center'>
         <h1>Loading</h1>
@@ -42,10 +64,10 @@ const CardsContainer = () => {
 
   return (
     <>
-      <MainTitle text={'Hi, ' + client.firstName + '. Here your cards!'} css='' />
+      <MainTitle text={'Hi, ' + user.name + '. Here your cards!'} css='' />
       <div className='flex flex-wrap gap-8 justify-center my-28'>
         {
-          cardData.map((card, id) => {
+          cards.map((card, id) => {
 
             if (card.cardColor === "GOLD") {
 
@@ -70,11 +92,8 @@ const CardsContainer = () => {
         }
 
       </div>
-
     </>
-
   )
-
 }
 
 export default CardsContainer
