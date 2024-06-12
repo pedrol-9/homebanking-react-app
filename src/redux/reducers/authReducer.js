@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit'
-import { login } from '../actions/authActions'
+import { login, logout } from '../actions/authActions'
 // import { createAction } from '@reduxjs/toolkit'
 
 
@@ -35,7 +35,9 @@ const authReducer = createReducer(initialState, (builder) => {
 				expiresIn: action.payload.expiresIn,				
 			}
 		})
-		
+		.addCase(logout, (state) => { 
+			return initialState
+		})
 
 	/* logout: (state) => {
 			state.loggedIn = false
