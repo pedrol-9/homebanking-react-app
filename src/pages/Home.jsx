@@ -30,7 +30,6 @@ const Home = () => {
   const navigate = useNavigate(); // Hook para redireccionar
 
   const handleLogin = async () => {
-    // e.preventDefault();
 
     setLoading(true);
 

@@ -8,6 +8,7 @@ const initialState = {
 	token: '',
 	expiresIn: '',
 	user: {
+		id: '',
 		name: '',
 		email: '',
 		image: ''
@@ -21,16 +22,20 @@ const authReducer = createReducer(initialState, (builder) => {
 			
 			return {
 				...state,
+				loggedIn: action.payload.loggedIn,
+				token: action.payload.token,
+				expiresIn: action.payload.expiresIn,
 				user: {
+					id: action.payload.id,
 					name: action.payload.name,
 					email: action.payload.email,
-					password: action.payload.password
-				},
-				token: action.payload.token,
-				loggedIn: action.payload.loggedIn,
-				expiresIn: action.payload.expiresIn
+					accounts: action.payload.accounts,
+					cards: action.payload.cards,
+					loans: action.payload.loans
+				}				
 			}
 		})
+		
 
 	/* logout: (state) => {
 			state.loggedIn = false

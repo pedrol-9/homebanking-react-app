@@ -1,80 +1,87 @@
-import axios from 'axios'
-// import { default as jwt_decode } from 'jwt-decode';
-import React, { useState, useEffect } from 'react'
-import AccCards from '../components/AccCards'
-import Button from '../components/Button'
-import MainTitle from '../components/MainTitle'
-import MainLayout from '../layouts/MainLayout'
-import Carrusel from '../components/Carrusel'
-
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import AccCards from '../components/AccCards';
+import Button from '../components/Button';
+import MainTitle from '../components/MainTitle';
+import MainLayout from '../layouts/MainLayout';
+import Carrusel from '../components/Carrusel';
+import { useSelector } from 'react-redux';
 
 const Accounts = () => {
-
-  const [accounts, setAccounts] = useState([]);
-  const [client, setClient] = useState([]);
+  // const [accounts, setAccounts] = useState([]); // Asegurarse de que el estado inicial es un arreglo vacío
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null); // Variable de estado para almacenar los errores
-  
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
+  const user = useSelector((state) => state.authReducer.user); // Accede al usuario del store
+  const token = useSelector((state) => state.authReducer.token); // Accede al token del store
+  const userId = useSelector((state) => state.authReducer.user.id);
+  const accounts = useSelector((state) => state.authReducer.user.accounts);
+
+ /*  useEffect(() => {
     const fetchAccounts = async () => {
       try {
-        setLoading(true)
-        const response = await axios.get('http://localhost:8080/api/clients/2');
-        console.log(response.data);
-        console.log(response.data.accounts);
-        setClient(response.data);
-        setAccounts(response.data.accounts);
+        setLoading(true);
+        // Hacer la petición a la API con el token
+        const response = await axios.get('http://localhost:8080/api/clients/current/accounts', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setAccounts(response.data.accounts || []); // Asegurarse de que `accounts` siempre es un arreglo
+        console.log(user)
+        console.log(userId)
       } catch (err) {
-        console.error('Error fetching data: ', err); // Capturar y mostrar el error en la consola
-        setError(err.message);
+        console.error('Error fetching data:', err);
+        setError(err);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchAccounts(); // Llamar a la función fetchAccounts cuando el componente se monte
-  }, []);
+    if (token) {
+      fetchAccounts(); // Llamar a la función fetchAccounts cuando el componente se monte si hay un token
+    }
+  }, [token]); */
 
   if (loading) {
     return (
       <div className='w-full text-center'>
         <MainTitle>Loading</MainTitle>
       </div>
-    )
+    );
   }
 
   if (error) {
     return (
       <div className='w-full text-center'>
-        <MainTitle>Error: {error.message}</MainTitle>;
+        <MainTitle>Error: {error.message}</MainTitle>
       </div>
-    )
+    );
   }
 
   return (
-    <>
-      <MainLayout>
-        <div className='flex flex-col'>
-          <MainTitle text={"Welcome, " + client.firstName + "!"} />
-          {/* <Banner img='\assets\imgs\banner_homebanking.png'/> */}
-          <Carrusel />
-          <div className='flex flex-wrap justify-center'>
-            {
-              accounts.map((acc, id) => {
-                return <AccCards key={id} accNumber={acc.number} amount={acc.balance} creationDate={acc.creationDate} />
-              })
-            }
-          </div>
-                 
-          <Button text="New Account" to='/NewAccount' />
+    <MainLayout>
+      <div className='flex flex-col'>
+        <MainTitle text={`Welcome, ${user.name || 'User'}!`} />
+        <Carrusel />
+        <div className='flex flex-wrap justify-center'>
+          {accounts.length > 0 ? (
+            accounts.map((acc, id) => (
+              <AccCards key={id} accNumber={acc.number} amount={acc.balance} creationDate={acc.creationDate} />
+            ))
+          ) : (
+            <p>No accounts available</p>
+          )}
         </div>
-      </MainLayout>
-    </>
-  )
-}
+        <Button text="New Account" to='/NewAccount' />
+      </div>
+    </MainLayout>
+  );
+};
 
-export default Accounts
+export default Accounts;
+
+
 
 /* useEffect(() => {
 

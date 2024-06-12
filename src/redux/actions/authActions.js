@@ -1,18 +1,26 @@
 import { createAction } from '@reduxjs/toolkit'
+import Accounts from '../../pages/Accounts'
 
 
-/* export const login = createAction('LOGIN', (user) => {
+export const login = createAction('LOGIN', (user) => {
 
     const clearInfo = {
-        name: user.name + " " + user.lastName,
+        token: user.token,
+        // loggedIn: user.loggedIn,
+        // expiresIn: user.expiresIn,
+        id: user.id,
+        name: user.firstName + " " + user.lastName,
         email: user.email,
-        password: user.password
+        accounts: user.accounts,
+        cards: user.cards,
+        loans: user.loans
+        // password: user.password,
     }
 
     return { payload: clearInfo }
-}) */
+})
 
-export const login = createAction('LOGIN', (user) => {
+/* export const login = createAction('LOGIN', (user) => {
     return { 
         payload: {
             name: user.name,
@@ -23,4 +31,4 @@ export const login = createAction('LOGIN', (user) => {
             expiresIn: user.expiresIn
         }
     }
-})
+}) */
