@@ -40,7 +40,7 @@ const Home = () => {
       const response = await axios.post('http://localhost:8080/api/auth/login', user);
       let token = response.data;
 
-      toast.success('Successful Login!', {
+      /* toast.success('Successful Login!', {
         position: "top-center",
         autoClose: 2000,
         hideProgressBar: false,
@@ -51,7 +51,7 @@ const Home = () => {
         theme: "dark",
         transition: Bounce,
       })
-      console.log('Transaction successful: ', response.data)
+      console.log('Successful Login!: ', response.data) */
 
       const responseCurrentClient = await axios.get("http://localhost:8080/api/auth/current", {
         headers: {
@@ -77,8 +77,8 @@ const Home = () => {
       dispatch(login(client));
       navigate('/accounts');
     } catch (error) {
-      console.error('Error making transaction: ', error.response.data)
-      toast.error('Transaction failed. Please try again.', {
+      console.error('Error loggin in: ', error.response.data)
+      toast.error('Login failed. Please try again.', {
         position: "top-center",
         autoClose: 2000,
         hideProgressBar: false,

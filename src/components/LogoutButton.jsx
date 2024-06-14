@@ -18,7 +18,7 @@ const LogoutButton = () => {
     };
 
     return (
-        <Button onClick={handleLogout} text="Logout" css="bg-red-900 hover:bg-red-500" />
+        <Button onClick={handleLogout} text="Logout" css="ml-4 bg-red-900 hover:bg-red-500" />
     );
 };
 
