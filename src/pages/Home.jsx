@@ -103,7 +103,7 @@ const Home = () => {
       <div className='flex flex-col'>
         <section className="flex justify-center items-center min-h-[60vh] mt-16 mb-10">
           <div className="h-full">
-            <div className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between bg-[#85A084] p-8 rounded-lg shadow-[0_10px_15px_rgba(0,0,0,0.3)]">
+            <div className="g-6 flex h-full flex-wrap items-center justify-center xs:m-8 lg:justify-between bg-[#85A084] p-8 rounded-lg shadow-[0_10px_15px_rgba(0,0,0,0.3)]">
               <div className="shrink-1 mb-12 grow-0 basis-auto md:mb-0 md:w-9/12 md:shrink-0 lg:w-6/12 xl:w-6/12">
                 <img
                   src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
@@ -111,11 +111,11 @@ const Home = () => {
                   alt="Sample image"
                 />
               </div>
-              <div className="mb-12 md:mb-0 md:w-9/12 lg:w-5/12 xl:w-5/12">
-                <form>
-                  <div className=' bg-[#f5efe6] p-2 h-fit rounded-lg pt-2 mb-4'>
+              <div className="mb-12 md:mb-0 xs:w-10/12 md:w-8/12 lg:w-5/12 xl:w-5/12">
+                <form className='md:m-2'>
+                  <div className=' bg-[#f5efe6] p-2 h-fit rounded-lg pt-2 mb-4 '>
                     <TEInput
-                      type="email"
+               s       type="email"
                       label="Email address"
                       size="lg"
                       className=""

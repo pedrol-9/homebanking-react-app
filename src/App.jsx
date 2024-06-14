@@ -4,13 +4,14 @@ import { useState } from 'react'
 import Accounts from './pages/Accounts'
 import Cards from './pages/Cards'
 import ApplyCards from './pages/ApplyCards'
-import SelectedAccount from './pages/SelectedAccount'
+
 import Loans from './pages/Loans'
 import ApplyLoan from './pages/ApplyLoan'
 import TransactionForm from './pages/TransactionForm';
 import Home from './pages/Home'
 import Register from './pages/Register'
 import MainLayout from './layouts/MainLayout'
+import AccountTransactions from './components/AccountTransactions'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/Register' element={<Register />} />
         <Route path='/Accounts' element={<Accounts />} />
+        <Route path='/AccountTransactions/:id' element={<AccountTransactions />} />
         <Route path='/Cards' element={<Cards />} />
         <Route path='/ApplyCards' element={<ApplyCards />} />
         <Route path='/Loans' element={<Loans />} />

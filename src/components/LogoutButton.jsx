@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { logout } from '../redux/actions/authActions';
 import Button from './Button';
 
-const LogoutButton = () => {
+const LogoutButton = ({css}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     // const token = useSelector((state) => state.authReducer.token);
@@ -18,7 +18,7 @@ const LogoutButton = () => {
     };
 
     return (
-        <Button onClick={handleLogout} text="Logout" css="ml-4 bg-red-900 hover:bg-red-500" />
+        <Button onClick={handleLogout} text="Logout" css="ml-4 bg-red-900 hover:bg-red-500 xl:absolute xl:-bottom-24 xl:right-2" />
     );
 };
 

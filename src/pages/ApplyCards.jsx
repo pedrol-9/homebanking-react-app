@@ -6,11 +6,14 @@ import MainTitle from '../components/MainTitle';
 import SelectCardType from '../components/SelectCardType';
 import SelectCardMembership from '../components/SelectCardMembership';
 import Button from '../components/Button';
+import { useNavigate } from 'react-router-dom';
+
 
 const ApplyCards = () => {
   const token = useSelector((state) => state.authReducer.token);
   const [cardType, setCardType] = useState(''); // Valor predeterminado para la opción deshabilitada
   const [cardMembership, setCardMembership] = useState(''); // Valor predeterminado para la opción deshabilitada
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log("ApplyCards Mounted");
@@ -42,6 +45,8 @@ const ApplyCards = () => {
       console.error('Error:', error.response?.data);
       // Manejo de errores
     }
+
+    navigate('/Cards')
   };
 
   return (

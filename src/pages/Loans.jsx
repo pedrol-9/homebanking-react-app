@@ -93,12 +93,13 @@ const Loans = () => {
           </div>
         </div>
 
-        <hr className='border-dotted border-[2px] w-1/2 bg-[#1A4D2E] self-center my-8' />
+        <hr className='border-0 border-t-2 border-solid border-[#1A4D2E] w-1/2 mx-auto my-8' />
 
-        <div>
-          <MainTitle text='Available loans to request' />
+        <div className='flex flex-col items-center'>
+          <MainTitle text='Available loans to request' css='bg-[#1A4D2E] inline-block xs:w-[90%] md:w-[70%] lg:w-[50%] xl:w-[40%] text-white py-2 xs:mx-16 rounded-md py-4 px-16' />
 
-          <div className='flex flex-wrap justify-center my-8'>
+          <div className='flex flex-wrap w-[90%] justify-center my-8 mx-16 bg-gradient-to-br from-[#E0B884] via-[#C7A273] to-[#E0B884] rounded-lg p-4 shadow-md 
+          hover:shadow-[0px_2px_8px_4px_#695608] border border-[5px] border-[#C0C2C9]'>
             {availableLoans.map((loan, id) => (
               <AvailableLoansInfo
                 key={id}

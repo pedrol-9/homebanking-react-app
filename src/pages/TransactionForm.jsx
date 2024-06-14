@@ -4,7 +4,7 @@ import MainLayout from '../layouts/MainLayout';
 import MainTitle from '../components/MainTitle';
 import { useSelector } from 'react-redux';
 import Button from '../components/Button';
-import { Bounce, ToastContainer, toast } from 'react-toastify'
+import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const TransactionForm = () => {
@@ -48,7 +48,7 @@ const TransactionForm = () => {
     const parsedAmount = parseFloat(amount);
     if (isNaN(parsedAmount)) {
       console.error('Invalid amount entered:', amount);
-      return;
+      return; // detiene la función handleSubmit
     }
 
     const transactionDate = new Date().toLocaleDateString('en-US');
@@ -95,7 +95,7 @@ const TransactionForm = () => {
         progress: undefined,
         theme: "dark",
         transition: Bounce,
-      })/*  */
+      })
     }
   };
 
@@ -104,8 +104,8 @@ const TransactionForm = () => {
       <>
         <MainTitle text="Create a Transaction" />
         <div className='flex justify-center items-center'>
-          <div className='flex justify-center w-3/5 items-center mt-16 mb-10'>
-            <form onSubmit={handleSubmit} className="w-1/2 flex flex-col m-4 bg-[#4F6F52] rounded-md p-4 border border-[3px] border-[#000000]">
+          <div className='flex justify-center w-full xs:w-3/4 lg:w-3/5 items-center mt-16 mb-10'>
+            <form onSubmit={handleSubmit} className="w-full md:w-3/4 lg:w-1/2 flex flex-col m-4 bg-[#4F6F52] rounded-md p-4 border border-[3px] border-[#000000]">
               <div className='flex justify-start items-center mb-4'>
                 <input
                   type="radio"
@@ -189,9 +189,7 @@ const TransactionForm = () => {
             <ToastContainer />
           </div>
         </div>
-
       </>
-
     </MainLayout>
   );
 };

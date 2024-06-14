@@ -6,12 +6,15 @@ import MainTitle from '../components/MainTitle';
 import MainLayout from '../layouts/MainLayout';
 import Carrusel from '../components/Carrusel';
 import { useSelector } from 'react-redux';
+import AccountTransactions from '../components/AccountTransactions';
+import { useNavigate } from 'react-router-dom';
 
 const Accounts = () => {
   const [accounts, setAccounts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedAccountId, setSelectedAccountId] = useState(null);
+  const navigate = useNavigate();
 
   const user = useSelector((state) => state.authReducer.user);
   const token = useSelector((state) => state.authReducer.token);
@@ -63,7 +66,7 @@ const Accounts = () => {
   };
 
   const handleSelectedAccount = (id) => {
-    setSelectedAccountId(id);
+    navigate('/AccountTransactions/' + id);
   };
 
   const formatDateTime = (dateTimeStr) => {
@@ -73,7 +76,7 @@ const Accounts = () => {
     const day = `0${dateObj.getDate()}`.slice(-2); // Agrega cero inicial y obtiene últimos 2 caracteres
     const hours = `0${dateObj.getHours()}`.slice(-2); // Agrega cero inicial y obtiene últimos 2 caracteres
     const minutes = `0${dateObj.getMinutes()}`.slice(-2); // Agrega cero inicial y obtiene últimos 2 caracteres
-  
+
     return `${year}-${month}-${day} ${hours}:${minutes}`;
   };
 
@@ -108,35 +111,6 @@ const Accounts = () => {
                   creationDate={acc.creationDate}
                   onClick={() => handleSelectedAccount(acc.id)} // Pasar el id al hacer clic
                 />
-                {selectedAccountId === acc.id && (
-                  <div className="account-details w-3/5">
-                    {/* Aquí puedes renderizar tu tabla o contenido adicional border border-[2px] border-black*/}
-                    <div className='flex flex-col justify-center'>
-                      <h4 className='font-bold text-center text-lg mb-3'><span className='bg-color2 text-white p-2 rounded-md'>{acc.number} -</span> Account Transactions:</h4>
-                      <table className="table border border-black border-dotted rounded-md p-2">
-                        <thead className='mt-2 mx-2'>
-                          <tr>
-                            <th className="bg-color2 text-white p-2 font-bold">Type</th>
-                            <th className="bg-color2 text-white p-2 font-bold">Amount</th>
-                            <th className="bg-color2 text-white p-2 font-bold">Date</th>
-                            <th className="bg-color2 text-white p-2 font-bold">Description</th>
-                          </tr>
-                        </thead>
-                        <tbody className='mb-2 mx-2'>
-                          {acc.transactions.map((trx, index) => (
-                            <tr key={trx.id} className={index % 2 === 0 ? 'bg-color3' : 'bg-color4'}>
-                              <td className="p-2 italic text-center">{trx.type}</td>
-                              <td className="p-2 italic text-center">{trx.amount.toFixed(2)}</td>
-                              <td className="p-2 italic text-center">{formatDateTime(trx.date)}</td>
-                              <td className="p-2 italic text-center">{trx.description}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                    {/* Otros detalles de cuenta */}
-                  </div>
-                )}
               </React.Fragment>
             ))
           ) : (
@@ -261,4 +235,32 @@ const Accounts = () => {
 };
 
 export default Accounts; */
+
+{/* RETAZO DE LA INFO DE TRANSACTIONS 
+  
+  <div className="account-details w-11/12 lg:w-9/12 lg:p-8">
+                    <div className='flex flex-col justify-center p-2'>
+                      <h4 className='font-bold text-center text-lg mb-3'><span className='bg-color2 text-white p-2 rounded-md'>{acc.number} -</span> Account Transactions:</h4>
+                      <table className="table border border-black border-dotted rounded-md p-2 xs:w-full">
+                        <thead className='mt-2 mx-2'>
+                          <tr>
+                            <th className="bg-color2 text-white p-2 font-bold">Type</th>
+                            <th className="bg-color2 text-white p-2 font-bold">Amount</th>
+                            <th className="bg-color2 text-white p-2 font-bold">Date</th>
+                            <th className="bg-color2 text-white p-2 font-bold">Description</th>
+                          </tr>
+                        </thead>
+                        <tbody className='mb-2 mx-2'>
+                          {acc.transactions.map((trx, index) => (
+                            <tr key={trx.id} className={index % 2 === 0 ? 'bg-color3' : 'bg-color4'}>
+                              <td className="p-2 italic text-center">{trx.type}</td>
+                              <td className="p-2 italic text-center">{trx.amount.toFixed(2)}</td>
+                              <td className="p-2 italic text-center">{formatDateTime(trx.date)}</td>
+                              <td className="p-2 italic text-center">{trx.description}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div> */}
 
