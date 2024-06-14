@@ -82,8 +82,8 @@ const Loans = () => {
   }
 
   return (
-    <>
-      <MainLayout>
+    <MainLayout>
+      <>
         <div className='my-8'>
           <MainTitle text='Your Loans' />
           <div className='flex flex-wrap justify-center mt-8'>
@@ -117,8 +117,8 @@ const Loans = () => {
 
           <Button text='Request new Loan' to='/ApplyLoans' css={'mb-8'} />
         </div>
-      </MainLayout>
-    </>
+      </>
+    </MainLayout>
   );
 };
 

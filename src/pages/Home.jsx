@@ -9,6 +9,8 @@ import { TECollapse, TERipple, TEInput } from "tw-elements-react";
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/actions/authActions';
 import PasswordInput from '../components/PasswordInput';
+import { Bounce, ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -38,9 +40,18 @@ const Home = () => {
       const response = await axios.post('http://localhost:8080/api/auth/login', user);
       let token = response.data;
 
-      if (response.status !== 200) {
-        return null;
-      }
+      toast.success('Successful Login!', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      })
+      console.log('Transaction successful: ', response.data)
 
       const responseCurrentClient = await axios.get("http://localhost:8080/api/auth/current", {
         headers: {
@@ -48,15 +59,36 @@ const Home = () => {
         }
       });
 
+      toast.success('Successful Login!', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      })
+
       let client = responseCurrentClient.data;
       client.token = token;
 
       dispatch(login(client));
       navigate('/accounts');
     } catch (error) {
-      console.error('Error:', error);
-      setError('Authentication failed');
-      alert('Status: ' + error.response.status + ' authentication failed');
+      console.error('Error making transaction: ', error.response.data)
+      toast.error('Transaction failed. Please try again.', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      })
     } finally {
       setLoading(false);
     }
@@ -119,6 +151,7 @@ const Home = () => {
                     </div>
                   </div>
                 </form>
+                <ToastContainer/>
               </div>
             </div>
           </div>

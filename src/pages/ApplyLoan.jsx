@@ -27,11 +27,11 @@ const ApplyLoan = ({ }) => {
     setSelectedLoanName(selectedLoanName);
 
     if (selectedLoan) {
-      setSelectedLoanName(selectedLoanName);
+      //setSelectedLoanName(selectedLoanName);
       setLoanId(selectedLoan.id);
       console.log(selectedLoan.id);
     } else {
-      console.log(`No se encontró ningún préstamo con el nombre '${selectedLoanName}'.`);
+      console.log(`couldn't find loan with name '${selectedLoanName}'.`);
     }
   };
   const handleAccountChange = (e) => {
@@ -56,6 +56,7 @@ const ApplyLoan = ({ }) => {
 
         setLoading(true);
 
+        // llamo loans available
         const response = await axios.get('http://localhost:8080/api/loans/', {
           headers: {
             Authorization: `Bearer ${token}`
@@ -65,6 +66,7 @@ const ApplyLoan = ({ }) => {
         console.log(response.data); // loans
         setLoans(response.data);
 
+        // llamo accounts del client
         const responseCurrentAccounts = await axios.get('http://localhost:8080/api/clients/current/accounts', {
           headers: {
             Authorization: `Bearer ${token}`
@@ -161,8 +163,8 @@ const ApplyLoan = ({ }) => {
   }
 
   return (
-    <>
-      <MainLayout>
+    <MainLayout>
+      <>
         <MainTitle text='Apply for a Loan' />
         <div className='flex flex-col justify-center items-center'>
           <form action="" className='flex flex-wrap items-center justify-around w-4/5 items-center mt-4 mb-10 p-4 mt-10'>
@@ -241,8 +243,8 @@ const ApplyLoan = ({ }) => {
             </div>
           </form>
         </div>
-      </MainLayout>
-    </>
+      </>
+    </MainLayout>
   )
 }
 

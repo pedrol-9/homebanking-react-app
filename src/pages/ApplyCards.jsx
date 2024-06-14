@@ -9,8 +9,8 @@ import Button from '../components/Button';
 
 const ApplyCards = () => {
   const token = useSelector((state) => state.authReducer.token);
-  const [cardType, setCardType] = useState('');
-  const [cardMembership, setCardMembership] = useState('');
+  const [cardType, setCardType] = useState(''); // Valor predeterminado para la opción deshabilitada
+  const [cardMembership, setCardMembership] = useState(''); // Valor predeterminado para la opción deshabilitada
 
   useEffect(() => {
     console.log("ApplyCards Mounted");
@@ -30,12 +30,11 @@ const ApplyCards = () => {
 
   const handleApply = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/api/clients/current/cards', infoForNewCard,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
+      const response = await axios.post('http://localhost:8080/api/clients/current/cards', infoForNewCard, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       console.log('Response:', response.data);
       // Aquí podrías manejar la respuesta del backend según tus necesidades
     } catch (error) {
@@ -47,12 +46,13 @@ const ApplyCards = () => {
 
   return (
     <MainLayout>
+    <>
       <MainTitle text="Apply for a Card" />
       <div className='flex justify-center items-center'>
         <div className='flex justify-center w-3/5 items-center mt-16 mb-10'>
           <form className="w-1/2 flex flex-col m-4 bg-[#4F6F52] rounded-md p-4 border border-[3px] border-[#000000]">
-            <SelectCardType style="my-2" onChange={(e) => setCardType(e.target.value)} />
-            <SelectCardMembership style="" onChange={(e) => setCardMembership(e.target.value)} />
+            <SelectCardType style="my-2" value={cardType} onChange={(e) => setCardType(e.target.value)} />
+            <SelectCardMembership style="" value={cardMembership} onChange={(e) => setCardMembership(e.target.value)} />
             <div className='w-full flex justify-center gap-2'>
               <Button text='Apply' onClick={handleApply} />
               <Button text='Cancel' />
@@ -63,8 +63,11 @@ const ApplyCards = () => {
           </figure>
         </div>
       </div>
+    </>
     </MainLayout>
   );
 };
 
 export default ApplyCards;
+
+
