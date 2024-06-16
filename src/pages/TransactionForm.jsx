@@ -52,7 +52,7 @@ const TransactionForm = () => {
     }
 
     const transactionDate = new Date().toLocaleDateString('en-US');
-    const defaultDescription = `Transaction made on: ${transactionDate} - Amount: ${parsedAmount} + Destination Account: ${destinationAccount}`;
+    const defaultDescription = `Transaction made on: ${transactionDate} ** Amount: $${parsedAmount} ** Destination Account: ${destinationAccount}`;
     const finalDescription = description.trim() === '' ? defaultDescription : description;
 
     try {
@@ -100,13 +100,13 @@ const TransactionForm = () => {
   };
 
   return (
-    <MainLayout>
-      <>
+    <>
+    {/* <MainLayout> */}
         <MainTitle text="Create a Transaction" />
         <div className='flex justify-center items-center'>
-          <div className='flex justify-center w-full xs:w-3/4 lg:w-3/5 items-center mt-16 mb-10'>
-            <form onSubmit={handleSubmit} className="w-full md:w-3/4 lg:w-1/2 flex flex-col m-4 bg-[#4F6F52] rounded-md p-4 border border-[3px] border-[#000000]">
-              <div className='flex justify-start items-center mb-4'>
+          <div className='flex justify-center w-full xs:w-3/4 lg:w-3/5 items-center mt-10 mb-10'>
+            <form onSubmit={handleSubmit} className="w-full md:w-3/4 lg:w-1/2 flex flex-col m-4 forms-gradient-bg rounded-md p-4 border border-[3px] border-[#000000]">
+              {/* <div className='flex justify-start items-center mb-4'>
                 <input
                   type="radio"
                   id="ownAccount"
@@ -133,13 +133,13 @@ const TransactionForm = () => {
                 <label htmlFor="thirdPartyAccount" className="text-gray-900 text-sm font-semibold">
                   Third Party Account
                 </label>
-              </div>
+              </div> */}
               <label className="flex flex-col items-start justify-between p-1 text-[#E8DFCA] font-semibold text-slate-400 my-2">
                 <select
                   name="sourceAccount"
                   value={selectedSourceAccount}
                   onChange={handleChange}
-                  className="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-4"
+                  className="cursor-pointer bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-4"
                   required
                 >
                   <option value="" disabled>Select origin account</option>
@@ -170,7 +170,7 @@ const TransactionForm = () => {
                   required
                 />
               </label>
-              <label className="flex flex-col items-start justify-between p-1 text-[#E8DFCA] font-semibold text-slate-400 mb-4">
+              <label className="flex flex-col items-start justify-between p-1 text-white font-semibold text-slate-400 mb-4">
                 Description (optional)
                 <input
                   type="text"
@@ -189,8 +189,8 @@ const TransactionForm = () => {
             <ToastContainer />
           </div>
         </div>
+        {/* </MainLayout> */}
       </>
-    </MainLayout>
   );
 };
 

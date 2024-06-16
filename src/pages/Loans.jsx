@@ -9,6 +9,9 @@ import Spin from '../components/Spin';
 import { useSelector } from 'react-redux';
 import LoansInfo from '../components/LoansInfo';
 
+import { Carousel } from 'antd';
+
+
 const Loans = () => {
   const [availableLoans, setAvailableLoans] = useState([]);
   const [loans, setLoans] = useState([]);
@@ -16,6 +19,22 @@ const Loans = () => {
 
   const user = useSelector((state) => state.authReducer.user);
   const token = useSelector((state) => state.authReducer.token);
+
+  const contentStyle = {
+    height: '160px',
+    color: '#fff',
+    lineHeight: '160px',
+    textAlign: 'center',
+    background: '#364d79',
+  };
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
 
   useEffect(() => {
     console.log("Loans Component Mounted");
@@ -82,50 +101,71 @@ const Loans = () => {
   }
 
   return (
-    <MainLayout>
-      <>
-        <div className='my-8'>
-          <MainTitle text='Your Loans' />
-          <div className='flex flex-wrap justify-center mt-8'>
-            {loans.map((loan, id) => (
-              <LoansInfo key={id} loanType={loan.name} amount={loan.amount} payments={loan.payments} />
-            ))}
-          </div>
+    <>
+      {/* <MainLayout> */}
+      <div className='my-8 '>
+        <MainTitle text='Your Loans' />
+        <div className='flex flex-wrap justify-center mt-8'>
+          {loans.map((loan, id) => (
+            <LoansInfo key={id} loanType={loan.name} amount={loan.amount} payments={loan.payments} />
+          ))}
         </div>
+      </div>
 
-        <hr className='border-0 border-t-2 border-solid border-[#1A4D2E] w-1/2 mx-auto my-8' />
+      <hr className='border-0 border-t-2 border-solid border-[#1A4D2E] w-1/2 mx-auto my-8' />
 
-        <div className='flex flex-col items-center'>
-          <MainTitle text='Available loans to request' css='bg-[#1A4D2E] inline-block xs:w-[90%] md:w-[70%] lg:w-[50%] xl:w-[40%] text-white py-2 xs:mx-16 rounded-md py-4 px-16' />
-
-          <div className='flex flex-wrap w-[90%] justify-center my-8 mx-16 bg-gradient-to-br from-[#E0B884] via-[#C7A273] to-[#E0B884] rounded-lg p-4 shadow-md 
-          hover:shadow-[0px_2px_8px_4px_#695608] border border-[5px] border-[#C0C2C9]'>
+      <div className='flex flex-col justify-center items-center xl:p-16 mb-10' >
+        <MainTitle text='Available Loans to Apply' css='bg-[#3f361e] xl:w-5/12 text-white px-4 py-2 rounded-lg xl:mt-0 mb-8 ' />
+        <div className='w-11/12 xl:w-1/2 p-2 h-1/2 bg-[#6BBDA4] rounded-lg radial-gradient-bg'>
+          <Carousel {...settings}>
             {availableLoans.map((loan, id) => (
-              <AvailableLoansInfo
-                key={id}
-                loanType={loan.loanName}
-                amount={loan.maxAmount}
-                payments={loan.payments.map((payment, index, array) => {
-                  if (index === array.length - 1) {
-                    return payment.toString();
-                  } else {
-                    return payment.toString() + ' - ';
-                  }
-                })}
-              />
-            ))}
-          </div>
+              <div className='flex justify-center items-center w-10/12 xl:8/12 '>
+                <AvailableLoansInfo
+                  key={id}
+                  loanType={loan.loanName}
+                  amount={loan.maxAmount}
+                  payments={loan.payments.map((payment, index, array) => {
+                    if (index === array.length - 1) {
+                      return payment.toString();
+                    } else {
+                      return payment.toString() + ' - ';
+                    }
+                  })}
+                />
+              </div>
 
-          <Button text='Request new Loan' to='/ApplyLoans' css={'mb-8'} />
+            ))}
+          </Carousel>
         </div>
-      </>
-    </MainLayout>
+      </div>
+      <Button text='Request new Loan' to='/ApplyLoans' css={'mb-8'} />
+      {/* </MainLayout> */}
+    </>
   );
 };
 
 export default Loans;
 
 
-/* En JavaScript, los índices de los arreglos comienzan desde 0. Por lo tanto, el índice del último elemento en un arreglo de longitud n es n - 1. Esto se debe a que los índices van desde 0 hasta n - 1, donde n es el número total de elementos en el arreglo.
+/* 
+<div className='flex flex-wrap w-[90%] justify-center my-8 mx-16 bg-gradient-to-br from-[#E0B884] via-[#C7A273] to-[#E0B884] rounded-lg p-4 shadow-md 
+  hover:shadow-[0px_2px_8px_4px_#695608] border border-[5px] border-[#C0C2C9]'>
+{availableLoans.map((loan, id) => (
+            <AvailableLoansInfo
+              key={id}
+              loanType={loan.loanName}
+              amount={loan.maxAmount}
+              payments={loan.payments.map((payment, index, array) => {
+                if (index === array.length - 1) {
+                  return payment.toString();
+                } else {
+                  return payment.toString() + ' - ';
+                }
+              })}
+            />
+          ))}
+  </div>
+
+En JavaScript, los índices de los arreglos comienzan desde 0. Por lo tanto, el índice del último elemento en un arreglo de longitud n es n - 1. Esto se debe a que los índices van desde 0 hasta n - 1, donde n es el número total de elementos en el arreglo.
 
 Entonces, cuando comparamos index === array.length - 1, estamos verificando si el índice actual (index) es igual al índice del último elemento en el arreglo (array.length - 1). Si esta comparación es verdadera, significa que estamos en el último elemento del arreglo. */

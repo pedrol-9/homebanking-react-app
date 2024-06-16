@@ -1,20 +1,33 @@
-import React from 'react'
-import { Carousel } from "flowbite-react";
+import React from 'react';
+import { Carousel } from 'antd';
 
 const Carrusel = () => {
-    return (
-        <>
-            <div className="w-full h-56 sm:h-64 xl:h-80 2xl:h-96 my-8">
-                <Carousel>
-                    <img src="\assets\imgs\banner_homebanking.png" alt="..." />
-                    <img src="\assets\imgs\cheerfulWomanBlue.jpg" alt="..." />
-                    <img src="\assets\imgs\cheerfulWomanOrange.jpg" alt="..." />
-                    <img src="\assets\imgs\bannerAzulOscuro.avif" alt="..." />
-                    {/* <img src="https://flowbite.com/docs/images/carousel/carousel-5.svg" alt="..." /> */}
-                </Carousel>
-            </div>
-        </>
-    )
-}
 
-export default Carrusel
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
+  const images = [
+    { img: '/assets/imgs/modern.jpg'},
+    { img: '/assets/imgs/cheerfulWomanBlue.jpg' },
+		{ img: '/assets/imgs/collage.jpg'},
+    { img: '/assets/imgs/cheerfulWomanOrange.jpg' },
+    { img: '/assets/imgs/bannerAzulOscuro.avif' },
+  ];
+
+  return (
+    <Carousel {...settings}>
+      {images.map((image, index) => (
+        <div key={index} className='h-[540px]'>
+          <img src={image.img} alt={`banner ${index}`} className='w-full h-[500px] object-cover rounded-xl' />
+        </div>
+      ))}
+    </Carousel>
+  );
+};
+
+export default Carrusel;

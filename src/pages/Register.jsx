@@ -5,9 +5,9 @@ import RegisterForm from '../components/RegisterForm'
 const Register = () => {
   return (
     <>
-      <MainLayout>
+      {/* <MainLayout> */}
         <RegisterForm/>
-      </MainLayout>
+      {/* </MainLayout> */}
     </>
 
   )

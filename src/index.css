@@ -9,3 +9,17 @@
     box-sizing: border-box;
     /* border: 1px solid black; */
 }
+
+@layer components {
+    .radial-gradient-bg {
+        background: radial-gradient(circle, #a38666 0%, #3f361e 100%);
+    }
+
+    .forms-gradient-bg {
+        background: radial-gradient(circle, #739781 0%, #1A4D2E 100%);
+    }
+
+    .carousel-gradient-bg {
+        background: linear-gradient(to bottom, #E8DFCA 0%, #c0ab70 100%);
+    }
+}

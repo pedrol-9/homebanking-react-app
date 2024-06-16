@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { useLocation } from 'react-router-dom';
+import { useLocation, Outlet } from 'react-router-dom';
 import LoginHeader from '../components/LoginHeader';
 
 const MainLayout = (props) => {
@@ -13,12 +13,14 @@ const MainLayout = (props) => {
     <div className="flex flex-col w-full min-h-screen">
         {landingViews ? <LoginHeader /> : <Header />}
         <main className="flex flex-1 flex-col bg-[#E8DFCA]">
-            {props.children}
+            <Outlet />
         </main>
         <Footer />
     </div>
 );
 }
+
+// {props.children}
 
 export default MainLayout
 

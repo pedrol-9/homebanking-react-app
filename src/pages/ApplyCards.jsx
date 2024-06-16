@@ -50,12 +50,36 @@ const ApplyCards = () => {
   };
 
   return (
-    <MainLayout>
     <>
       <MainTitle text="Apply for a Card" />
       <div className='flex justify-center items-center'>
-        <div className='flex justify-center w-3/5 items-center mt-16 mb-10'>
-          <form className="w-1/2 flex flex-col m-4 bg-[#4F6F52] rounded-md p-4 border border-[3px] border-[#000000]">
+        <div className='flex flex-col lg:flex-row justify-center w-full lg:w-3/5 items-center mt-8 lg:mt-16 mb-10'>
+          <form className="w-11/12 md:w-3/5 lg:w-1/2 flex flex-col m-4 forms-gradient-bg rounded-md p-4 border border-[3px] border-[#000000]">
+            <SelectCardType className="my-2" value={cardType} onChange={(e) => setCardType(e.target.value)} />
+            <SelectCardMembership className="my-2" value={cardMembership} onChange={(e) => setCardMembership(e.target.value)} />
+            <div className='w-full flex justify-center gap-2 mt-4'>
+              <Button text='Apply' onClick={handleApply} />
+              <Button text='Cancel' />
+            </div>
+          </form>
+          <figure className='flex justify-center mt-8 lg:mt-0 lg:ml-8'>
+            <img className='w-4/5 md:w-3/5 lg:w-3/5' src="/assets/imgs/applyCards.png" alt="image of credit cards" />
+          </figure>
+        </div>
+      </div>
+    </>
+
+  );
+};
+
+export default ApplyCards;
+
+{/* <>
+    
+      <MainTitle text="Apply for a Card" />
+      <div className='flex justify-center items-center '>
+        <div className='flex justify-center w-3/5 items-center mt-16 mb-10 '>
+          <form className="w-1/2 flex flex-col m-4 forms-gradient-bg rounded-md p-4 border border-[3px] border-[#000000] ">
             <SelectCardType style="my-2" value={cardType} onChange={(e) => setCardType(e.target.value)} />
             <SelectCardMembership style="" value={cardMembership} onChange={(e) => setCardMembership(e.target.value)} />
             <div className='w-full flex justify-center gap-2'>
@@ -68,11 +92,7 @@ const ApplyCards = () => {
           </figure>
         </div>
       </div>
-    </>
-    </MainLayout>
-  );
-};
-
-export default ApplyCards;
+  
+    </> */}
 
 

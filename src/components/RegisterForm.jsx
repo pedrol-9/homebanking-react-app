@@ -55,7 +55,7 @@ const RegisterForm = () => {
   }
 
   return (
-    <div className='flex justify-center items-center p-8 mt-8 border border-black'>
+    <div className='flex justify-center items-center p-8 mt-8'>
       <div className="bg-white p-8 rounded-lg shadow-lg xs:w-4/5 lg:w-2/5">
         <h2 className="text-2xl font-bold mb-4">Register</h2>
         {error && <p className="text-red-500">{error}</p>}

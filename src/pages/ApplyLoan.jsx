@@ -163,89 +163,130 @@ const ApplyLoan = ({ }) => {
   }
 
   return (
-    <MainLayout>
-      <>
-        <MainTitle text='Apply for a Loan' />
-        <div className='flex flex-col justify-center items-center'>
-          <form action="" className='flex flex-wrap items-center justify-around w-4/5 items-center mt-4 mb-10 p-4 mt-10'>
-            <div className='w-[48%] flex flex-col'>
-              <label className=''> Select Loan Type
-                <select
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  onChange={handleLoanChange}
-                  value={selectedLoanName}
-                >
-                  <option value="" className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-thin text-lg" disabled>Select a loan type</option>
-                  {
-                    loans.map((loan) => (
-                      <option key={loan.id} value={loan.loanName} className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-bold text-lg">{loan.loanName}</option>
-                    ))
-                  }
-                </select>
+    <>
+      
+      <MainTitle text='Apply for a Loan' />
+      <div className='flex flex-col justify-center items-center my-8'>
+        <form action="" className='flex flex-wrap items-center justify-around w-4/5 lg:w-3/5 xl:w-2/5 items-center mt-4 mb-10 p-4 mt-10 forms-gradient-bg rounded-md p-4 b'>
+          <div className='w-10/12 p-4 flex flex-col b'>
+            <label className=''>
+              <select
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                onChange={handleLoanChange}
+                value={selectedLoanName}
+              >
+                <option value="" className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-thin text-lg" disabled>Select a loan type</option>
+                {
+                  loans.map((loan) => (
+                    <option key={loan.id} value={loan.loanName} className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-bold text-lg">{loan.loanName}</option>
+                  ))
+                }
+              </select>
 
-              </label>
+            </label>
 
-              <label className='mt-8'> Select Destination Account
-                <select
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  onChange={handleAccountChange}
-                  value={selectedAccount}
-                >
-                  <option value="" className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-thin text-lg" disabled>Select a destination account</option>
-                  {
-                    accounts.map((acc) => (
-                      <option key={acc.id} value={acc.number} className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-bold text-lg">{acc.number}</option>
-                    ))
-                  }
-                </select>
+            <label className='mt-8'>
+              <select
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                onChange={handleAccountChange}
+                value={selectedAccount}
+              >
+                <option value="" className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-thin text-lg" disabled>Select a destination account</option>
+                {
+                  accounts.map((acc) => (
+                    <option key={acc.id} value={acc.number} className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-bold text-lg">{acc.number}</option>
+                  ))
+                }
+              </select>
 
-              </label>
+            </label>
 
-              <label className='mt-8'> Amount
-                <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=' 2000' value={amount} onChange={handleAmountChange} />
-              </label>
+            <label className='mt-8'>
+              <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=' Amount' value={amount} onChange={handleAmountChange} />
+            </label>
 
-              <label className='mt-8'> Installments
-                <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleInstallmentsChange} value={installments}>
-                  <option value="" className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-thin text-lg" disabled>Select number of installments</option>
-                  {renderPaymentOptions()}
-                </select>
-              </label>
-            </div>
+            <label className='mt-8'> 
+              <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleInstallmentsChange} value={installments}>
+                <option value="" className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-thin text-lg" disabled>Select number of installments</option>
+                {renderPaymentOptions()}
+              </select>
+            </label>
 
-            <div className="w-[42%] rounded-2xl bg-[#1A4D2E] m-4">
-              <div className="flex flex-col gap-2 p-3">
-
-                <label className="flex cursor-pointer items-center justify-between p-1 text-[#E8DFCA] font-semibold text-slate-400">
-                  Accept terms of use
-                  <div className="relative inline-block">
-                    <input className="peer h-6 w-12 cursor-pointer appearance-none rounded-full border border-gray-300 bg-gary-400 checked:border-green-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2" type="checkbox" />
-                    <span className="pointer-events-none absolute left-1 top-1 block h-4 w-4 rounded-full bg-slate-600 transition-all duration-200 peer-checked:left-7 peer-checked:bg-green-300"></span>
-                  </div>
-                </label>
-                <label className="flex cursor-pointer items-center justify-between p-1 text-[#E8DFCA] font-semibold text-slate-400">
-                  Subscribe to newsletter
-                  <div className="relative inline-block">
-                    <input className="peer h-6 w-12 cursor-pointer appearance-none rounded-full border border-gray-300 bg-gary-400 checked:border-green-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2" type="checkbox" />
-                    <span className="pointer-events-none absolute left-1 top-1 block h-4 w-4 rounded-full bg-slate-600 transition-all duration-200 peer-checked:left-7 peer-checked:bg-green-300"></span>
-                  </div>
-                </label>
-
-                <button
-                  type="submit" // Cambiado a type="submit" para que funcione dentro de un formulario
-                  className="inline-block w-1/3 self-center cursor-pointer rounded-md bg-[#4F6F52] px-4 py-3.5 text-center text-sm font-semibold uppercase text-white transition duration-200 ease-in-out hover:bg-[#E8DFCA] hover:text-[#1A4D2E] hover:font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-700 focus-visible:ring-offset-2 active:scale-95"
-                  onClick={handleSubmit} // Llama a la función handleSubmit en el evento onClick
-                >
-                  Submit
-                </button>
-
-              </div>
-            </div>
-          </form>
-        </div>
-      </>
-    </MainLayout>
+            <button
+                type="submit" // Cambiado a type="submit" para que funcione dentro de un formulario
+                className="w-1/3 self-center focus:outline-none text-white text-lg font-bold bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 rounded-lg px-5 py-2.5 me-2 mt-8"
+                onClick={handleSubmit} // Llama a la función handleSubmit en el evento onClick
+              >
+                Submit
+              </button>
+          </div>
+        </form>
+      </div>
+      
+    </>
   )
 }
 
 export default ApplyLoan
+
+{/* <>
+      
+      <MainTitle text='Apply for a Loan' />
+      <div className='flex flex-col justify-center items-center'>
+        <form action="" className='flex flex-wrap items-center justify-around w-4/5 items-center mt-4 mb-10 p-4 mt-10 forms-gradient-bg rounded-md p-4 border border-[3px] border-[#000000]'>
+          <div className='w-[48%] flex flex-col'>
+            <label className=''>
+              <select
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                onChange={handleLoanChange}
+                value={selectedLoanName}
+              >
+                <option value="" className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-thin text-lg" disabled>Select a loan type</option>
+                {
+                  loans.map((loan) => (
+                    <option key={loan.id} value={loan.loanName} className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-bold text-lg">{loan.loanName}</option>
+                  ))
+                }
+              </select>
+
+            </label>
+
+            <label className='mt-8'>
+              <select
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                onChange={handleAccountChange}
+                value={selectedAccount}
+              >
+                <option value="" className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-thin text-lg" disabled>Select a destination account</option>
+                {
+                  accounts.map((acc) => (
+                    <option key={acc.id} value={acc.number} className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-bold text-lg">{acc.number}</option>
+                  ))
+                }
+              </select>
+
+            </label>
+
+            <label className='mt-8'>
+              <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=' Amount' value={amount} onChange={handleAmountChange} />
+            </label>
+
+            <label className='mt-8'> 
+              <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleInstallmentsChange} value={installments}>
+                <option value="" className="py-2 bg-[#E8DFCA] text-[#1A4D2E] font-thin text-lg" disabled>Select number of installments</option>
+                {renderPaymentOptions()}
+              </select>
+            </label>
+
+            <button
+                type="submit" // Cambiado a type="submit" para que funcione dentro de un formulario
+                className="focus:outline-none text-white text-lg font-bold bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 rounded-lg px-5 py-2.5 me-2 my-4"
+                onClick={handleSubmit} // Llama a la función handleSubmit en el evento onClick
+              >
+                Submit
+              </button>
+          </div>
+        </form>
+      </div>
+      
+    </> */}

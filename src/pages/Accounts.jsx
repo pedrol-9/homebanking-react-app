@@ -6,8 +6,10 @@ import MainTitle from '../components/MainTitle';
 import MainLayout from '../layouts/MainLayout';
 import Carrusel from '../components/Carrusel';
 import { useSelector } from 'react-redux';
-import AccountTransactions from '../components/AccountTransactions';
+import AccountTransactions from './AccountTransactions';
 import { useNavigate } from 'react-router-dom';
+
+import { Carousel } from 'antd';
 
 const Accounts = () => {
   const [accounts, setAccounts] = useState([]);
@@ -97,10 +99,18 @@ const Accounts = () => {
   }
 
   return (
-    <MainLayout>
-      <div className='flex flex-col'>
-        <MainTitle text={`Welcome, ${user.name || 'User'}!`} />
-        <Carrusel />
+    // <MainLayout>
+    <>
+      <div className='flex flex-col '>
+        <MainTitle text={`Welcome, ${user.name || 'User'}!`} css='mt-20' />
+        <div className='flex justify-center items-start mt-10 p-2 carousel-gradient-bg '>
+          <div className='w-10/12 xl:w-11/12 p-4 '>
+            <Carrusel />
+          </div>
+        </div>
+
+
+        <MainTitle text="Your accounts" css='mt-16' />
         <div className='flex flex-wrap justify-center my-8'>
           {accounts.length > 0 ? (
             accounts.map((acc, id) => (
@@ -119,8 +129,8 @@ const Accounts = () => {
         </div>
         <Button text="New Account" onClick={createAccount} />
       </div>
-
-    </MainLayout>
+    </>
+    // </MainLayout>
   );
 };
 
