@@ -18,15 +18,15 @@ let Header = () => {
         <h2 className='italic text-[#E8DFCA] text-xs md:text-sm lg:text-xs font-semibold'>Empowering your Financial Journey</h2>
       </div>
 
-      <div className='flex sm:flex-row w-full xs:w-3/5 justify-center xl:justify-end mt-2 xl:mt-0 xl:relative'>
-        <nav className="flex justify-center lg:w-7/12 xl:w-fit md:justify-end m-2">
+      <div className='flex sm:flex-row w-full justify-center xl:justify-end mt-2 xl:mt-0 xl:relative'>
+        <nav className="flex justify-center w-full xl:w-fit md:justify-end m-2">
           <div className='flex flex-col w-full xl:flex-row gap-2 items-center justify-end p-2 m-2'>
             {/* Mostrar Dropdown en xs a md */}
             <div className="block lg:hidden">
               <Dropdown />
             </div>
             {/* Mostrar links de navegación en lg */}
-            <div className="hidden lg:flex flex-col xl:flex-row lg:w-10/12 gap-2 items-center justify-end p-2 m-2">
+            <div className="hidden flex-col lg:flex lg:flex-row w-full gap-2 items-center justify-end p-2 m-2">
               {links.map((link) => (
                 <NavLink
                   key={link.to}
