@@ -1,6 +1,5 @@
 import { BrowserRouter } from 'react-router-dom'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { useState } from 'react'
 import Accounts from './pages/Accounts'
 import Cards from './pages/Cards'
 import ApplyCards from './pages/ApplyCards'
@@ -9,9 +8,7 @@ import ApplyLoan from './pages/ApplyLoan'
 import TransactionForm from './pages/TransactionForm';
 import Home from './pages/Home'
 import Register from './pages/Register'
-// import MainLayout from './layouts/MainLayout'
 import AccountTransactions from './pages/AccountTransactions'
-import { useSelector } from 'react-redux'
 import AuthorizedRoutes from './HOCs/AuthorizedRoutes'
 import PublicRoutes from './HOCs/PublicRoutes'
 import MainLayout from './layouts/MainLayout'
@@ -68,9 +65,6 @@ const publicRoutes = [
 ]
 
 function App() {
-
-  // const loggedIn = useSelector((state) => state.authReducer.loggedIn);
-  // const loggedIn  = false
 
   return (
     <BrowserRouter>

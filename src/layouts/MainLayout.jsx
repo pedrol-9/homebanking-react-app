@@ -20,8 +20,6 @@ const MainLayout = (props) => {
 );
 }
 
-// {props.children}
-
 export default MainLayout
 
 /*  VERSION CON OUTLET PARA LAS RUTAS PROTEGIDAS

@@ -14,7 +14,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-center xl:w-auto lg:w-3/12 xl:w-3/12 xs:mx-3 xl:mx-0 gap-4 mt-4 text-[#ffffff] text-sm">
+        <div className="flex flex-wrap justify-center xl:w-auto lg:w-3/12 xl:w-1/3 xs:mx-3 xl:mx-0 gap-4 mt-4 text-[#ffffff] text-sm">
           <NavLink to="#" className="mr-4 hover:underline">FAQ</NavLink>
           <NavLink to="#" className="mr-4 hover:underline">Send a PQRS</NavLink>
           <NavLink to="/ApplyLoans" className="mr-4 hover:underline">Apply for Loans</NavLink>
