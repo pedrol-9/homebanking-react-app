@@ -82,8 +82,8 @@ function App() {
           {
             publicRoutes.map(PublicRoutes)
           }
-          <Route path="*" element={<Navigate to="/" />} />
 
+          <Route path="*" element={<Navigate to="/" />} />
         </Route>
 
       </Routes>

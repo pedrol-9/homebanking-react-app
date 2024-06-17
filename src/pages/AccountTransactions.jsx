@@ -50,13 +50,13 @@ const AccountTransactions = () => {
   return (
     <>
     {/* <MainLayout> */}
-    <MainTitle text="Transactions Details" />
+    <MainTitle text="Account details" />
       <div className="flex flex-col justify-center items-center">
         <AccCards accNumber={account.number} amount={account.balance} creationDate={account.creationDate}/>
-        <div className="account-details w-11/12 lg:w-9/12 lg:p-8">
+        <div className="account-details w-11/12 lg:w-9/12 lg:p-8 mb-10 ">
           <div className='flex flex-col justify-center p-2'>
-            <h4 className='font-bold text-center text-lg mb-3'>
-              Account Transactions:
+            <h4 className='font-bold text-center text-lg mb-8'>
+              Transactions:
             </h4>
             <table className="table border border-black border-dotted rounded-md p-2 xs:w-full">
               <thead className='mt-2 mx-2'>

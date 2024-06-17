@@ -1,5 +1,4 @@
 import { createAction } from '@reduxjs/toolkit'
-import Accounts from '../../pages/Accounts'
 
 
 export const login = createAction('LOGIN', (user) => {
@@ -10,11 +9,7 @@ export const login = createAction('LOGIN', (user) => {
         expiresIn: new Date(Date.now() + 1000 * 60 * 60).toISOString(),
         id: user.id,
         name: user.firstName + " " + user.lastName,
-        email: user.email,
-        // accounts: user.accounts,
-        // cards: user.cards,
-        // loans: user.loans
-        // password: user.password,
+        email: user.email
     }
 
     return { payload: clearInfo }
@@ -22,15 +17,31 @@ export const login = createAction('LOGIN', (user) => {
 
 export const logout = createAction('LOGOUT')
 
-/* export const login = createAction('LOGIN', (user) => {
-    return { 
-        payload: {
-            name: user.name,
-            email: user.email,
-            password: user.password,
-            token: user.token,
-            loggedIn: user.loggedIn,
-            expiresIn: user.expiresIn
+export const eraseError = createAction('ERASE_ERROR')
+
+/* 
+export const loginAsync = createAsyncThunk('LOGIN_ASYNC', async (user) => {
+
+    const response = await axios.post('http://localhost:8080/api/auth/login', user);
+    const token = response.data;
+
+    const responseCurrentClient = await axios.get("http://localhost:8080/api/auth/current", {
+        headers: {
+            Authorization: `Bearer ${token}`
         }
+    });
+
+    const client = responseCurrentClient.data;
+    console.log(client)
+
+    const clearInfo = {
+        token: token,
+        loggedIn: true,
+        expiresIn: new Date(Date.now() + 1000 * 60 * 60).toISOString(),
+        id: client.id,
+        name: client.firstName + " " + client.lastName,
+        email: user.email
     }
+
+    return clearInfo
 }) */

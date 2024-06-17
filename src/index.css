@@ -12,7 +12,7 @@
 
 @layer components {
     .radial-gradient-bg {
-        background: radial-gradient(circle, #a38666 0%, #3f361e 100%);
+        background: radial-gradient(circle, #3f361e 0%, #a38666 100%);
     }
 
     .forms-gradient-bg {

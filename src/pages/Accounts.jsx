@@ -3,13 +3,11 @@ import React, { useState, useEffect } from 'react';
 import AccCards from '../components/AccCards';
 import Button from '../components/Button';
 import MainTitle from '../components/MainTitle';
-import MainLayout from '../layouts/MainLayout';
+import { Bounce, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 import Carrusel from '../components/Carrusel';
 import { useSelector } from 'react-redux';
-import AccountTransactions from './AccountTransactions';
 import { useNavigate } from 'react-router-dom';
-
-import { Carousel } from 'antd';
 
 const Accounts = () => {
   const [accounts, setAccounts] = useState([]);
@@ -59,11 +57,37 @@ const Accounts = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+
       console.log('Account created:', response.data);
+
       fetchAccounts(); // Actualizar las cuentas después de crear una nueva
+
+      toast.success('New account created successfully!', {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+
     } catch (error) {
+
       console.error('Error creating account:', error.response.data);
-      setError(error.response.data);
+      toast.error(error.response.data, {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition: Bounce,
+      });
+      
     }
   };
 
@@ -101,14 +125,13 @@ const Accounts = () => {
   return (
     // <MainLayout>
     <>
-      <div className='flex flex-col '>
-        <MainTitle text={`Welcome, ${user.name || 'User'}!`} css='mt-20' />
+      <div className='flex flex-col justify-center'>
+        <MainTitle text={`Welcome, ${user.name || 'User'}!`} css='mt-16 bg-[#1A4D2E] text-white w-fit self-center py-2 px-4 rounded-md' />
         <div className='flex justify-center items-start mt-10 p-2 carousel-gradient-bg '>
           <div className='w-10/12 xl:w-11/12 p-4 '>
             <Carrusel />
           </div>
         </div>
-
 
         <MainTitle text="Your accounts" css='mt-16' />
         <div className='flex flex-wrap justify-center my-8'>

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import MainTitle from '../components/MainTitle'
-import MainLayout from '../layouts/MainLayout'
+import { Bounce, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 import Spin from '../components/Spin'
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const ApplyLoan = ({ }) => {
 
@@ -17,6 +19,7 @@ const ApplyLoan = ({ }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [loanId, setLoanId] = useState();
+  const navigate = useNavigate();
 
   const user = useSelector((state) => state.authReducer.user);
   const token = useSelector((state) => state.authReducer.token);
@@ -79,7 +82,7 @@ const ApplyLoan = ({ }) => {
       } catch (error) {
 
         setError(error);
-        console.error('Error parsing loan info:', error);
+        console.error('Error parsing loan info:', error.response.data);
         return null;
 
       } finally {
@@ -140,12 +143,35 @@ const ApplyLoan = ({ }) => {
         }
       });
 
-      console.log('Respuesta del servidor:', response.data); // Puedes manejar la respuesta del servidor aquí
+      console.log('Server response:', response.data); // Puedes manejar la respuesta del servidor aquí
+      navigate('/Loans');
 
-      // Aquí puedes realizar acciones adicionales después de recibir la respuesta, por ejemplo, mostrar un mensaje de éxito o redirigir a otra página
+      toast.success('Loan application fulfilled!', {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+
     } catch (error) {
-      console.error('Error al enviar la solicitud de préstamo:', error);
-      // Aquí puedes manejar el error, por ejemplo, mostrar un mensaje de error al usuario
+
+      console.error('Error:', error.response?.data);
+      toast.error(error.response?.data, {
+        position: "bottom-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition: Bounce,
+      });  
+
     } finally {
       setLoading(false); // Asegúrate de detener el estado de carga al finalizar la solicitud
     }

@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import MainLayout from '../layouts/MainLayout';
-import axios from 'axios';
-import MainTitle from '../components/MainTitle';
 import Button from '../components/Button';
+import axios from 'axios';
 import Spin from '../components/Spin';
-import { TECollapse, TERipple, TEInput } from "tw-elements-react";
-import { useDispatch } from 'react-redux';
+import { TERipple, TEInput } from "tw-elements-react";
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/actions/authActions';
 import PasswordInput from '../components/PasswordInput';
-import { Bounce, ToastContainer, toast } from 'react-toastify'
+import { Bounce, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-
 
 
 const Home = () => {
@@ -75,90 +72,47 @@ const Home = () => {
       const client = responseCurrentClient.data;
       client.token = token;
 
+      
+
       if (client) {
         console.log('Logged in as: ', client);
+        
         dispatch(login(client)); // Actualizar el estado de autenticación
         navigate('/Accounts');   // Redirigir a la página de cuentas
+        
+        toast.success('Successful Login!', {
+          position: "bottom-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+
       } else {
         console.log('Login failed');
       }
     } catch (error) {
+
       console.error('Error logging in: ', error.response.data);
       toast.error('Login failed. Please try again.', {
-        position: "top-center",
-        autoClose: 2000,
+        position: "bottom-right",
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        progress: undefined,
         theme: "dark",
         transition: Bounce,
       });
+
     } finally {
       setLoading(false);
     }
   };
-
-  /* const handleLogin = async () => {
-    setLoading(true);
-
-    const user = {
-      email: username,
-      password: password
-    };
-
-    try {
-      const response = await axios.post('http://localhost:8080/api/auth/login', user);
-      let token = response.data;
-
-      
-
-      const responseCurrentClient = await axios.get("http://localhost:8080/api/auth/current", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-
-      toast.success('Successful Login!', {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-      })
-
-      let client = responseCurrentClient.data;
-      client.token = token;
-
-      if (client) {
-        console.log('Logged in as: ', client);
-        dispatch(login(client));
-        navigate('/Accounts');
-      } else {
-        console.log('Login failed');
-      }
-    } catch (error) {
-      console.error('Error loggin in: ', error.response.data)
-      toast.error('Login failed. Please try again.', {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-      })
-    } finally {
-      setLoading(false);
-    }
-  }; */
 
   if (loading) {
     return <Spin />;
@@ -220,7 +174,7 @@ const Home = () => {
                       </div>
                     </div>
                   </form>
-                  <ToastContainer />
+                  {/* <ToastContainer /> */}
                 </div>
               </div>
             </div>
@@ -233,17 +187,3 @@ const Home = () => {
 };
 
 export default Home;
-
-
-/* toast.success('Successful Login!', {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-      })
-      console.log('Successful Login!: ', response.data) */

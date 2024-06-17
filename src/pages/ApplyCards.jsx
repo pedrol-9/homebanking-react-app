@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import MainLayout from '../layouts/MainLayout';
 import MainTitle from '../components/MainTitle';
 import SelectCardType from '../components/SelectCardType';
 import SelectCardMembership from '../components/SelectCardMembership';
 import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';
+import { Bounce, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const ApplyCards = () => {
@@ -38,15 +39,35 @@ const ApplyCards = () => {
           Authorization: `Bearer ${token}`
         }
       });
-      console.log('Response:', response.data);
-      // Aquí podrías manejar la respuesta del backend según tus necesidades
-    } catch (error) {
-      console.error('Error:', error);
-      console.error('Error:', error.response?.data);
-      // Manejo de errores
-    }
+      console.log('Server response:', response.data);
+      navigate('/Cards')
 
-    navigate('/Cards')
+      toast.success('Card application fulfilled!', {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+
+    } catch (error) {
+      
+      console.error('Error:', error.response?.data);
+      toast.error(error.response?.data, {
+        position: "bottom-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition: Bounce,
+      });    
+    }
   };
 
   return (
