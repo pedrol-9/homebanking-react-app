@@ -1,5 +1,6 @@
 import React from 'react';
 import { Links } from '../Utils/Links'; // Asumiendo que tienes definida la lista de enlaces aquí
+import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -13,15 +14,17 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-center xl:w-auto lg:w-3/12 xs:mx-3 xl:mx-0 gap-4 mt-4 text-[#ffffff] text-sm">
-          <a href="#" className="mr-4 hover:underline">FAQ</a>
-          <a href="#" className="mr-4 hover:underline">Send a PQRS</a>
+        <div className="flex flex-wrap justify-center xl:w-auto lg:w-3/12 xl:w-3/12 xs:mx-3 xl:mx-0 gap-4 mt-4 text-[#ffffff] text-sm">
+          <NavLink to="#" className="mr-4 hover:underline">FAQ</NavLink>
+          <NavLink to="#" className="mr-4 hover:underline">Send a PQRS</NavLink>
+          <NavLink to="/ApplyLoans" className="mr-4 hover:underline">Apply for Loans</NavLink>
+          <NavLink to="/ApplyCards" className="mr-4 hover:underline">Apply for Cards</NavLink>
           {Links.map((link, index) => (
-            <a key={index} href={link.to} className="mr-4 hover:underline">{link.text}</a>
+            <NavLink key={index} to={link.to} className="mr-4 hover:underline">{link.text}</NavLink>
           ))}
         </div>
 
-        <div className='flex flex-col items-center gap-4 bg-[#85A084] rounded-lg p-4 mt-4 w-3/12 sm:w-auto lg:w-3/12'>
+        <div className='flex flex-col items-center gap-4 bg-[#85A084] rounded-lg p-4 mt-4 w-3/12 xs:w-6/12 lg:w-3/12'>
           <h2 className='font-bold text-[#695608] text-lg mb-4'>Follow us on our social media</h2>
           <div className='flex gap-5'>
             <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
