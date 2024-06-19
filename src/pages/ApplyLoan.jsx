@@ -60,7 +60,7 @@ const ApplyLoan = ({ }) => {
         setLoading(true);
 
         // llamo loans available
-        const response = await axios.get('http://localhost:8080/api/loans/', {
+        const response = await axios.get('https://java-module.onrender.com/api/loans/', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -70,7 +70,7 @@ const ApplyLoan = ({ }) => {
         setLoans(response.data);
 
         // llamo accounts del client
-        const responseCurrentAccounts = await axios.get('http://localhost:8080/api/clients/current/accounts', {
+        const responseCurrentAccounts = await axios.get('https://java-module.onrender.com/api/clients/current/accounts', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -137,7 +137,7 @@ const ApplyLoan = ({ }) => {
     try {
       setLoading(true); // Puedes utilizar setLoading para mostrar un spinner o indicador de carga
 
-      const response = await axios.post('http://localhost:8080/api/loans/', loanData, {
+      const response = await axios.post('https://java-module.onrender.com/api/loans/', loanData, {
         headers: {
           Authorization: `Bearer ${token}`
         }

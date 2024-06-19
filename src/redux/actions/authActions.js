@@ -22,10 +22,10 @@ export const eraseError = createAction('ERASE_ERROR')
 /* 
 export const loginAsync = createAsyncThunk('LOGIN_ASYNC', async (user) => {
 
-    const response = await axios.post('http://localhost:8080/api/auth/login', user);
+    const response = await axios.post('https://java-module.onrender.com/api/auth/login', user);
     const token = response.data;
 
-    const responseCurrentClient = await axios.get("http://localhost:8080/api/auth/current", {
+    const responseCurrentClient = await axios.get("https://java-module.onrender.com/api/auth/current", {
         headers: {
             Authorization: `Bearer ${token}`
         }

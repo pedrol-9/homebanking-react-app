@@ -18,7 +18,7 @@ const AccountTransactions = () => {
     console.log(id)
     const fetchAccountDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/clients/accounts/${id}`, {
+        const response = await axios.get(`https://java-module.onrender.com/api/clients/accounts/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

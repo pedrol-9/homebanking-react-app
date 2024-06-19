@@ -28,11 +28,8 @@ const CardContent = ({clientName, cardNumber, ccv, thruDate, cardType}) => {
           <figure className='w-[55px] mb-3' >
             <img className='mt-2' src="\assets\imgs\chip.png" alt="card chip" />
           </figure>
-
         </div>
-        
       </div>
-
     </>
   )
 }

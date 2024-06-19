@@ -1,8 +1,11 @@
 import React from 'react';
 import { Links } from '../Utils/Links'; // Asumiendo que tienes definida la lista de enlaces aquí
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Footer = () => {
+  const loggedIn = useSelector((state) => state.authReducer.loggedIn);
+
   return (
     <>
       <footer className="flex flex-col md:flex-row lg:flex-wrap min-h-[10vh] justify-between items-center w-full text-center text-bold text-[#ffffff] italic py-3 px-8 bg-gradient-to-r from-[#1A4D2E] via-[#4F6F52] to-[#1A4D2E]">
@@ -17,9 +20,13 @@ const Footer = () => {
         <div className="flex flex-wrap justify-center xl:w-auto lg:w-3/12 xl:w-1/3 xs:mx-3 xl:mx-0 gap-4 mt-4 text-[#ffffff] text-sm">
           <NavLink to="#" className="mr-4 hover:underline">FAQ</NavLink>
           <NavLink to="#" className="mr-4 hover:underline">Send a PQRS</NavLink>
-          <NavLink to="/ApplyLoans" className="mr-4 hover:underline">Apply for Loans</NavLink>
-          <NavLink to="/ApplyCards" className="mr-4 hover:underline">Apply for Cards</NavLink>
-          {Links.map((link, index) => (
+          {loggedIn &&
+            <>
+              <NavLink to="/ApplyLoans" className="mr-4 hover:underline">Apply for Loans</NavLink>
+              <NavLink to="/ApplyCards" className="mr-4 hover:underline">Apply for Cards</NavLink>
+            </>
+          }
+          {loggedIn && Links.map((link, index) => (
             <NavLink key={index} to={link.to} className="mr-4 hover:underline">{link.text}</NavLink>
           ))}
         </div>

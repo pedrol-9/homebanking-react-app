@@ -22,7 +22,7 @@ const Accounts = () => {
   const fetchAccounts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:8080/api/clients/current/accounts', {
+      const response = await axios.get('https://java-module.onrender.com/api/clients/current/accounts', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -42,9 +42,11 @@ const Accounts = () => {
 
   useEffect(() => {
     console.log("Accounts Mounted");
+
     if (token) {
       fetchAccounts();
     }
+    
     return () => {
       console.log("Accounts unmounted");
     }
@@ -52,7 +54,7 @@ const Accounts = () => {
 
   const createAccount = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/api/clients/current/accounts', {}, {
+      const response = await axios.post('https://java-module.onrender.com/api/clients/current/accounts', {}, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -182,7 +184,7 @@ const Accounts = () => {
   const fetchAccounts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:8080/api/clients/current/accounts', {
+      const response = await axios.get('https://java-module.onrender.com/api/clients/current/accounts', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -212,7 +214,7 @@ const Accounts = () => {
 
   const createAccount = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/api/clients/current/accounts', {}, {
+      const response = await axios.post('https://java-module.onrender.com/api/clients/current/accounts', {}, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

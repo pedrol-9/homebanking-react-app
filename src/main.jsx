@@ -55,6 +55,5 @@ toast.success('Successful Login!', {
     theme: "dark",
     transition: Bounce,
   });
-   
-
+  
   */

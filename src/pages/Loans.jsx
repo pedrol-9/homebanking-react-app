@@ -43,7 +43,7 @@ const Loans = () => {
       try {
         setLoading(true);
 
-        const response = await axios.get('http://localhost:8080/api/loans/', {
+        const response = await axios.get('https://java-module.onrender.com/api/loans/', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -72,7 +72,7 @@ const Loans = () => {
       try {
         setLoading(true);
 
-        const clientResponse = await axios.get('http://localhost:8080/api/auth/current', {
+        const clientResponse = await axios.get('https://java-module.onrender.com/api/auth/current', {
           headers: {
             Authorization: `Bearer ${token}`,
           },

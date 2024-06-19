@@ -34,7 +34,7 @@ const ApplyCards = () => {
 
   const handleApply = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/api/clients/current/cards', infoForNewCard, {
+      const response = await axios.post('https://java-module.onrender.com/api/clients/current/cards', infoForNewCard, {
         headers: {
           Authorization: `Bearer ${token}`
         }

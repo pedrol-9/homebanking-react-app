@@ -33,7 +33,7 @@ const RegisterForm = () => {
     };
 
     try {
-      const newClient = await axios.post('http://localhost:8080/api/auth/register', payload);
+      const newClient = await axios.post('https://java-module.onrender.com/api/auth/register', payload);
 
       if (newClient) {
         console.log('Client registered successfully');

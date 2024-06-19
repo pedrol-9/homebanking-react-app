@@ -20,7 +20,7 @@ const TransactionForm = () => {
   useEffect(() => {
     const fetchAccounts = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/clients/current/accounts', {
+        const response = await axios.get('https://java-module.onrender.com/api/clients/current/accounts', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -66,7 +66,7 @@ const TransactionForm = () => {
 
       console.log('Form data:', transactionData);
 
-      const response = await axios.post('http://localhost:8080/api/clients/current/transactions', transactionData, {
+      const response = await axios.post('https://java-module.onrender.com/api/clients/current/transactions', transactionData, {
         headers: {
           Authorization: `Bearer ${token}`
         }

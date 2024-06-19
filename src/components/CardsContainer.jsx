@@ -23,7 +23,7 @@ const CardsContainer = () => {
       try {
 
         setLoading(true)
-        const response = await axios.get('http://localhost:8080/api/clients/current/cards', {
+        const response = await axios.get('https://java-module.onrender.com/api/clients/current/cards', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
