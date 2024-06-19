@@ -70,9 +70,7 @@ const Home = () => {
       });
 
       const client = responseCurrentClient.data;
-      client.token = token;
-
-      
+      client.token = token;      
 
       if (client) {
         console.log('Logged in as: ', client);
