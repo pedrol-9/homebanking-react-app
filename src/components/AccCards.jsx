@@ -12,7 +12,7 @@ const AccCards = (props) => {
   };
 
   return (
-    <div className="flex flex-col xs:min-w-[50%] lg:min-w-[33%] xl:min-w-[25%] bg-[#1A4D2E] m-10 border rounded-md py-2 shadow-lg hover:shadow-xl transform transition-transform duration-300 ease-in-out hover:scale-105"  onClick={props.onClick}>
+    <div className="flex flex-col w-9/12 md:w-4/12 xl:w-3/12 bg-[#1A4D2E] m-10 border rounded-md py-2 shadow-lg hover:shadow-xl transform transition-transform duration-300 ease-in-out hover:scale-105"  onClick={props.onClick}>
       <h4 className="bg-[#E8DFCA] text-[#1A4D2E] text-center font-extrabold px-2 py-1 mb-2 inline-block ">{props.accNumber}</h4>
 
       <div className='px-4 pb-4'>

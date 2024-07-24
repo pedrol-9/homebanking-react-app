@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import CardContent from './CardContent'
 import MainTitle from './MainTitle';
 import { useSelector  } from 'react-redux';
+import Spin from './Spin';
 
 const CardsContainer = () => {
 
@@ -28,19 +29,13 @@ const CardsContainer = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-
         console.log(response.data)
-        
         setCards(response.data);
 
-      } catch (err) {
-
+      } catch (err) {        
         console.error('Error fetching data: ', err);
-
       } finally {
-
-        setLoading(false)
-        
+        setLoading(false)        
       }
     }
 
@@ -53,13 +48,8 @@ const CardsContainer = () => {
     }
   }, [token]);
 
-  if (!cards) {
-
-    return (
-      <div className='w-full text-center'>
-        <h1>Loading</h1>
-      </div>
-    )
+  if (loading) {
+    return <Spin />
   }
 
   return (

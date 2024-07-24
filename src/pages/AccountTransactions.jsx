@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import MainLayout from '../layouts/MainLayout';
 import AccCards from '../components/AccCards';
 import MainTitle from '../components/MainTitle';
+import Spin from '../components/Spin';
 
 const AccountTransactions = () => {
   const [account, setAccount] = useState(null);
@@ -44,7 +45,7 @@ const AccountTransactions = () => {
 
 
   if (!account) {
-    return <div>Loading...</div>;
+    return <Spin />
   }
 
   return (
@@ -61,10 +62,10 @@ const AccountTransactions = () => {
             <table className="table border border-black border-dotted rounded-md p-2 xs:w-full">
               <thead className='mt-2 mx-2'>
                 <tr>
-                  <th className="bg-color2 text-white p-2 font-bold">Type</th>
-                  <th className="bg-color2 text-white p-2 font-bold">Amount</th>
-                  <th className="bg-color2 text-white p-2 font-bold">Date</th>
-                  <th className="bg-color2 text-white p-/*  */2 font-bold">Description</th>
+                  <th className="bg-color2 text-center text-white p-2 font-bold">Type</th>
+                  <th className="bg-color2 text-center text-white p-2 font-bold">Amount</th>
+                  <th className="bg-color2 text-center text-white p-2 font-bold">Date</th>
+                  <th className="bg-color2 text-center text-white p-2 font-bold">Description</th>
                 </tr>
               </thead>
               <tbody className='mb-2 mx-2'>

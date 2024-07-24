@@ -6,6 +6,7 @@ import MainTitle from '../components/MainTitle';
 import { Bounce, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Carrusel from '../components/Carrusel';
+import Spin from '../components/Spin';  
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -109,11 +110,7 @@ const Accounts = () => {
   };
 
   if (loading) {
-    return (
-      <div className='w-full text-center'>
-        <MainTitle>Loading</MainTitle>
-      </div>
-    );
+    return <Spin />
   }
 
   if (error) {
@@ -128,9 +125,9 @@ const Accounts = () => {
     // <MainLayout>
     <>
       <div className='flex flex-col justify-center'>
-        <MainTitle text={`Welcome, ${user.name || 'User'}!`} css='mt-16 bg-[#1A4D2E] text-white w-fit self-center py-2 px-4 rounded-md' />
-        <div className='flex justify-center items-start mt-10 p-2 carousel-gradient-bg '>
-          <div className='w-10/12 xl:w-11/12 p-4 '>
+        <MainTitle text={`Welcome, ${user.name || 'User'}!`} css='mt-14 mb-0 bg-[#1A4D2E] text-white w-fit self-center py-2 px-4 rounded-md' />
+        <div className='flex justify-center items-start mt-8 p-2 carousel-gradient-bg '>
+          <div className='w-11/12 xl:w-10/12 p-4'>
             <Carrusel />
           </div>
         </div>

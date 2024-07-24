@@ -18,7 +18,8 @@ export default {
   },
   plugins: [
     flowbite.plugin(),
-    require("tw-elements-react/dist/plugin.cjs")
+    require("tw-elements-react/dist/plugin.cjs"),
+    require('daisyui'),
   ]
 }
 

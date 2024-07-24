@@ -69,15 +69,14 @@ const Loans = () => {
 
   useEffect(() => {
     const fetchClientLoans = async () => {
+
       try {
         setLoading(true);
-
         const clientResponse = await axios.get('https://java-module.onrender.com/api/auth/current', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-
         console.log(clientResponse.data);
         if (clientResponse.data && clientResponse.data.loans) {
           setLoans(clientResponse.data.loans);
@@ -112,14 +111,12 @@ const Loans = () => {
         </div>
       </div>
 
-      <hr className='border-0 border-t-2 border-solid border-[#1A4D2E] w-1/2 mx-auto my-8' />
-
-      <div className='flex flex-col justify-center items-center xl:p-16 mb-10' >
-        <MainTitle text='Available Loans to Apply' css='bg-[#3f361e] xl:w-5/12 text-white px-4 py-2 rounded-lg xl:mt-0 mb-8 ' />
-        <div className='w-11/12 xl:w-1/2 p-2 h-1/2 bg-[#6BBDA4] rounded-lg radial-gradient-bg'>
+      <div className='flex flex-col justify-center items-center xl:p-16 my-10 relative' >
+        <MainTitle text='Available Loans to Apply' css='bg-[#3f361e] xl:w-4/12 text-white px-4 py-2 rounded-lg xl:mt-0 mb-8 absolute -top-16 xl:top-10 ' />
+        <div className='w-11/12 md:w-3/4 xl:w-1/2 p-2 h-1/2 bg-[#6BBDA4] rounded-lg radial-gradient-bg '>
           <Carousel {...settings}>
             {availableLoans.map((loan, id) => (
-              <div className='flex justify-center items-center w-10/12 xl:8/12 '>
+              <div className='flex justify-center items-center w-11/12'>
                 <AvailableLoansInfo
                   key={id}
                   loanType={loan.loanName}
@@ -133,9 +130,10 @@ const Loans = () => {
                   })}
                 />
               </div>
-
             ))}
           </Carousel>
+
+
         </div>
       </div>
       <Button text='Request new Loan' to='/ApplyLoans' css={'mb-8'} />
@@ -145,27 +143,3 @@ const Loans = () => {
 };
 
 export default Loans;
-
-
-/* 
-<div className='flex flex-wrap w-[90%] justify-center my-8 mx-16 bg-gradient-to-br from-[#E0B884] via-[#C7A273] to-[#E0B884] rounded-lg p-4 shadow-md 
-  hover:shadow-[0px_2px_8px_4px_#695608] border border-[5px] border-[#C0C2C9]'>
-{availableLoans.map((loan, id) => (
-            <AvailableLoansInfo
-              key={id}
-              loanType={loan.loanName}
-              amount={loan.maxAmount}
-              payments={loan.payments.map((payment, index, array) => {
-                if (index === array.length - 1) {
-                  return payment.toString();
-                } else {
-                  return payment.toString() + ' - ';
-                }
-              })}
-            />
-          ))}
-  </div>
-
-En JavaScript, los índices de los arreglos comienzan desde 0. Por lo tanto, el índice del último elemento en un arreglo de longitud n es n - 1. Esto se debe a que los índices van desde 0 hasta n - 1, donde n es el número total de elementos en el arreglo.
-
-Entonces, cuando comparamos index === array.length - 1, estamos verificando si el índice actual (index) es igual al índice del último elemento en el arreglo (array.length - 1). Si esta comparación es verdadera, significa que estamos en el último elemento del arreglo. */

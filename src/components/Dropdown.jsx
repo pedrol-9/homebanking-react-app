@@ -21,28 +21,29 @@ const Dropdown = () => {
   }, []);
 
   return (
-    <div className="relative inline-block text-left" ref={dropdownRef}>
-      <div>
-        <button
-          type="button"
-          className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-6 py-4 bg-white text-lg font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          Menu
-          <svg className="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fillRule="evenodd" d="M10 3a1 1 0 01.832.445l.061.092 4 6a1 1 0 01-.832 1.463H5.939a1 1 0 01-.832-1.463l.061-.092 4-6A1 1 0 0110 3zM4 12a1 1 0 01.117 1.993L4 14H3a1 1 0 01-.117-1.993L3 12h1zm12 0a1 1 0 01.117 1.993L16 14h-1a1 1 0 01-.117-1.993L15 12h1z" clipRule="evenodd" />
-          </svg>
-        </button>
-      </div>
+    <div className="relative h-full w-full p-1" ref={dropdownRef}>
+      <button
+        type="button"
+        className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm py-2 pl-3 pr-1 bg-white text-lg font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        Menu
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 10L12 15L17 10H7Z" fill="currentColor" />
+        </svg>
+      </button>
 
       {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-[#E8DFCA] ring-1 ring-black ring-opacity-5">
-          <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+        <div className="origin-top-right absolute -right-16 mt-2 w-40 rounded-md shadow-lg bg-[#E8DFCA] ring-1 opacity-90 ring-black ring-opacity-5">
+          <div className="py-.5" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
             {links.map((link) => (
               <NavLink
                 key={link.to}
                 to={link.to}
-                className="block px-4 py-2 text-md text-gray-700 hover:text-gray-900 hover:italic hover:font-bold hover:bg-gray-100" role="menuitem"
+                class="block px-2 py-1 text-start text-gray-700 hover:text-gray-900 hover:italic hover:font-extrabold hover:bg-gray-100 "
+                className={({isActive}) => `block px-2 py-1 text-start hover:text-gray-900 hover:italic hover:font-extrabold hover:bg-gray-100 ${isActive ? 'bg-[#DAA520] text-white font-bold' : 'text-gray-700'}`} 
+                role="menuitem" 
+                onClick={() => setIsOpen(false)}
               >
                 {link.text}
               </NavLink>
@@ -55,3 +56,25 @@ const Dropdown = () => {
 };
 
 export default Dropdown;
+
+/* 
+
+className="block px-2 py-1 text-start text-gray-700 hover:text-gray-900 hover:italic hover:font-extrabold hover:bg-gray-100 "
+
+<div className={({isActive}) => `${isActive ? 'bg-[#7EBD7A]' : 'origin-top-right absolute -right-16 mt-2 w-40 rounded-md shadow-lg bg-[#E8DFCA] ring-1 opacity-90 ring-black ring-opacity-5'}`}>
+
+{isOpen && (
+  <div className="origin-top-right absolute -right-16 mt-2 w-40 rounded-md shadow-lg bg-[#E8DFCA] ring-1 opacity-90 ring-black ring-opacity-5">
+    <div className="py-.5" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+      {links.map((link) => (
+        <NavLink
+          key={link.to}
+          to={link.to}
+          className="block px-2 py-1 text-start text-gray-700 hover:text-gray-900 hover:italic hover:font-extrabold hover:bg-gray-100 " role="menuitem" onClick={() => setIsOpen(false)}
+        >
+          {link.text}
+        </NavLink>
+      ))}
+    </div>
+  </div>
+)} */
